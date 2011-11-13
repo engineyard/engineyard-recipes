@@ -1,6 +1,5 @@
 require 'thor'
 require 'engineyard-recipes/thor-ext/actions/directory'
-require 'engineyard-recipes/appcloud_env'
 
 module Engineyard
   module Recipes
@@ -52,8 +51,8 @@ module Engineyard
       def no_environments_discovered
         say "No environments with name recipes, recipes_server, recipes_production, recipes_server_production.", :red
         say "Either:"
-        say "  * Create an AppCloud environment called recipes, recipes_server, recipes_production, recipes_server_production"
-        say "  * Use --environment/--account flags to select AppCloud environment"
+        say "  * Create an Engine Yard Cloud environment called recipes, recipes_server, recipes_production, recipes_server_production"
+        say "  * Use --environment/--account flags to select Engine Yard Cloud environment"
       end
       
       def too_many_environments_discovered(environments)

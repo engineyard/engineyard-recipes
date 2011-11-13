@@ -1,7 +1,7 @@
 require 'thor/group'
 
-module Engineyard
-  module Recipes
+module Engineyard::Recipes
+  module Generators
     class InitGenerator < Thor::Group
       include Thor::Actions
       
@@ -25,6 +25,7 @@ module Engineyard
       # end
       # 
       def readme
+        say ""
         say "Lovely.", :green
       end
       
