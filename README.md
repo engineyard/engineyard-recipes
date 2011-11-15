@@ -2,8 +2,6 @@
 
 Tools to generate, upload, test and apply chef recipes for Engine Yard Cloud.
 
-[![Build Status](https://secure.travis-ci.org/engineyard/engineyard-recipes.png)](http://travis-ci.org/engineyard/engineyard-recipes)
-
 ## Installation
 
     gem install engineyard-recipes
@@ -146,6 +144,10 @@ From the command line:
 ```
 bundle exec rake travis
 ```
+
+[![Build Status](https://secure.travis-ci.org/engineyard/engineyard-recipes.png)](http://travis-ci.org/engineyard/engineyard-recipes) 
+
+Not sure why its failing.
 
 ### Release
 
