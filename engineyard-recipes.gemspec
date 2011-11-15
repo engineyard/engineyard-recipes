@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rake", ["~> 0.9.2"])
   s.add_development_dependency("cucumber", ["~> 1.1.2"])
   s.add_development_dependency("rspec", ["~> 2.7.0"])
+  s.add_development_dependency("launchy")
   # s.add_development_dependency("json")
   # s.add_development_dependency("awesome_print")
   # s.add_development_dependency("realweb", '~>0.1.6')

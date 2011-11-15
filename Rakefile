@@ -11,6 +11,11 @@ namespace :cucumber do
   task :all => [:ok, :wip]
 end
 
+desc "Go to TravisCI status page"
+task :travis do
+  require "launchy"
+  Launchy.open("http://travis-ci.org/#!/engineyard/engineyard-recipes")
+end
 desc 'Alias for cucumber:ok'
 task :cucumber => 'cucumber:ok'
 
