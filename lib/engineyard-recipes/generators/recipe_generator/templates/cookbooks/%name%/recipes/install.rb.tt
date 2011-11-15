@@ -1,0 +1,10 @@
+#
+# Cookbook Name:: <%= name %>
+# Recipe:: install
+#
+
+# package 'dev-something/<%= name %>' do
+#   version node[:<%= name %>_version]
+# 
+#   action :install
+# end

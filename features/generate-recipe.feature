@@ -11,17 +11,13 @@ Feature: Generate package recipe
     And file "cookbooks/new-component/recipes/default.rb" is created
     And file "cookbooks/new-component/recipes/default.rb" contains "require_recipe 'new-component::install'"
     And file "cookbooks/new-component/recipes/install.rb" is created
-    And file "cookbooks/new-component/attributes/default.rb" is created
+    And file "cookbooks/new-component/attributes/recipe.rb" is created
     And I should see exactly
       """
-            create  cookbooks/new-component/recipes
-            create  cookbooks/new-component/recipes/default.rb
+             exist  cookbooks
+            create  cookbooks/new-component/attributes/recipe.rb
             create  cookbooks/new-component/recipes/default.rb
             create  cookbooks/new-component/recipes/install.rb
-            create  cookbooks/new-component/attributes
-            create  cookbooks/new-component/attributes/default.rb
-      
-      Lovely.
       """
   
   Scenario: Generate a recipe that already exists
@@ -29,9 +25,10 @@ Feature: Generate package recipe
     When I run local executable "ey-recipes" with arguments "recipe new-component"
     And I should see exactly
       """
-            exists already
-      
-      Lovely.
+             exist  cookbooks
+         identical  cookbooks/new-component/attributes/recipe.rb
+         identical  cookbooks/new-component/recipes/default.rb
+         identical  cookbooks/new-component/recipes/install.rb
       """
   
   
