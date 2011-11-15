@@ -27,13 +27,8 @@ Quickly generate recipes from git repositories or local folders.
 Either repos that describe a recipe such as [ey-dnapi](https://github.com/damm/ey-dnapi):
 
 ```
-$ ey-recipes clone git://github.com/damm/ey-dnapi.git
-```
-
-Or repos that contain multiple recipes, such as [ey-cloud-recipes](https://github.com/engineyard/ey-cloud-recipes/tree/master/cookbooks/):
-
-```
-$ ey-recipes clone git://github.com/engineyard/ey-cloud-recipes.git --path cookbooks/emerge
+$ git clone git://github.com/damm/ey-dnapi.git /tmp/ey-dnapi
+$ ey-recipes clone /tmp/ey-dnapi
 ```
 
 Generate scaffolding for a package/service.
