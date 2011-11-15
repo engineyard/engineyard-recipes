@@ -2,13 +2,14 @@ require 'thor/group'
 
 module Engineyard::Recipes
   module Generators
-    class RecipeGenerator < Thor::Group
+    class DefinitionGenerator < Thor::Group
       include Thor::Actions
       
       argument :recipe_name
+      argument :definition_name
 
       def self.source_root
-        File.join(File.dirname(__FILE__), "recipe_generator", "templates")
+        File.join(File.dirname(__FILE__), "definition_generator", "templates")
       end
       
       def install_cookbooks

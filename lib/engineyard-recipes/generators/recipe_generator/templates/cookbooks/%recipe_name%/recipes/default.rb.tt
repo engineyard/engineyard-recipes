@@ -1,0 +1,5 @@
+#
+# Cookbook Name:: <%= recipe_name %>
+# Recipe:: default
+#
+require_recipe '<%= recipe_name %>::install'

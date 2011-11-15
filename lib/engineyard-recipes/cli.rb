@@ -11,10 +11,16 @@ module Engineyard
         Engineyard::Recipes::Generators::InitGenerator.start
       end
       
-      desc "recipe NAME", "Generate recipe for a package"
-      def recipe(name)
+      desc "recipe RECIPE", "Generate recipe for a package"
+      def recipe(recipe_name)
         require 'engineyard-recipes/generators/recipe_generator'
-        Engineyard::Recipes::Generators::RecipeGenerator.start([name])
+        Engineyard::Recipes::Generators::RecipeGenerator.start([recipe_name])
+      end
+      
+      desc "definition RECIPE DEFINITION", "Generate recipe for a package"
+      def definition(recipe_name, definition_name)
+        require 'engineyard-recipes/generators/definition_generator'
+        Engineyard::Recipes::Generators::DefinitionGenerator.start([recipe_name, definition_name])
       end
       
       desc "version", "show version information"

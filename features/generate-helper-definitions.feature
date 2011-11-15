@@ -7,25 +7,22 @@ Feature: Generate helper definitions recipe
   
   Scenario: Generate a new recipe
     When I run local executable "ey-recipes" with arguments "definition mylibrary helper1"
-    And file "cookbooks/new-component/definitions/helper1.rb" is created
-    And file "cookbooks/new-component/definitions/helper1.rb" contains "define :helper1 do"
+    And file "cookbooks/mylibrary/definitions/helper1.rb" is created
+    And file "cookbooks/mylibrary/definitions/helper1.rb" contains "define :helper1 do"
     And I should see exactly
       """
-            create  cookbooks/new-component/definitions
-            create  cookbooks/new-component/definitions/helper1.rb
-      
-      Lovely.
+             exist  cookbooks
+            create  cookbooks/mylibrary/definitions/helper1.rb
       """
   
   Scenario: Generate a recipe that already exists
     When I run local executable "ey-recipes" with arguments "definition mylibrary helper1"
     When I run local executable "ey-recipes" with arguments "definition mylibrary helper2"
+    And file "cookbooks/mylibrary/definitions/helper2.rb" contains "define :helper2 do"
     And I should see exactly
       """
-            exists  cookbooks/new-component/definitions
-            create  cookbooks/new-component/definitions/helper2.rb
-      
-      Lovely.
+             exist  cookbooks
+            create  cookbooks/mylibrary/definitions/helper2.rb
       """
   
   
