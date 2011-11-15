@@ -6,3 +6,6 @@ rvm:
 notifications:
   recipients:
     - drnicwilliams@gmail.com
+branches:
+  only:
+    - master
