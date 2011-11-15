@@ -33,10 +33,14 @@ Generate scaffolding for a package/service.
 
 ```
 $ ey-recipes recipe newthing
+    create  cookbooks/newthing/attributes/recipe.rb
+    create  cookbooks/newthing/recipes/default.rb
+    create  cookbooks/newthing/recipes/install.rb
 ```
 
 Generate scaffolding for helper functions:
 
 ```
-$ ey-recipes definition myhelpers
+$ ey-recipes definition myhelpers some_helper
+    create  cookbooks/mylibrary/definitions/helper1.rb
 ```
