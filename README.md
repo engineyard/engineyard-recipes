@@ -2,6 +2,8 @@
 
 Tools to generate, upload, test and apply chef recipes for Engine Yard Cloud.
 
+[![Build Status](https://secure.travis-ci.org/engineyard/engineyard-recipes.png)](http://travis-ci.org/engineyard/engineyard-recipes)
+
 ## Usage
 
 Getting started:
