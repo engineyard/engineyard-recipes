@@ -1,5 +1,6 @@
 require 'thor'
 require 'engineyard-recipes/thor-ext/actions/directory'
+require 'engineyard-recipes/fetch_uri'
 
 module Engineyard
   module Recipes
@@ -23,6 +24,15 @@ module Engineyard
         Engineyard::Recipes::Generators::DefinitionGenerator.start([recipe_name, definition_name])
       end
       
+      desc "clone URI", "Clone a recipe into cookbook. URI can be git or local path."
+      def clone(folder_path) # TODO support git URIs
+        require 'engineyard-recipes/generators/local_recipe_clone_generator'
+        generator = Engineyard::Recipes::Generators::LocalRecipeCloneGenerator
+        recipe_name = File.basename(folder_path)
+        local_cookbook_path = FetchUri.fetch_uri(folder_path, generator.source_root)
+        generator.start([recipe_name])
+      end
+      
       desc "version", "show version information"
       def version
         require 'engineyard-recipes/version'
@@ -44,20 +54,6 @@ module Engineyard
       def error(text)
         shell.say "ERROR: #{text}", :red
         exit
-      end
-      
-      # Returns the [host, port] for the target Recipes CI server
-      def host_port(options)
-        require "recipes"
-        require "recipes/config"
-        if base_uri = ::Recipes::Config.config['base_uri']
-          uri = URI.parse(::Recipes::Config.config['base_uri'])
-          host = uri.host
-          port = uri.port
-        end
-        host = options["host"] if options["host"]
-        port = options["port"] || port || '80'
-        [host, port]
       end
       
       def no_environments_discovered
