@@ -126,3 +126,35 @@ $ git clone https://github.com/damm/ey-dnapi.git /tmp/recipes/ey-dnapi
 $ ey-recipes clone /tmp/recipes/ey-dnapi -n dnapi
 ```
 
+## Development
+
+### Tests
+
+The tests are currently a suite of Cucumber tests that run the generators and assert that specific files are generated. It does not test the generated files/recipes against EY Cloud.
+
+```
+bundle exec rake # to run all non-WIP tests
+bundle exec rake cucumber:wip # to run all WIP tests
+```
+
+### CI
+
+See the latest [CI build results on Travis](http://travis-ci.org/#!/engineyard/engineyard-recipes "Travis CI - Distributed build platform for the open source community") (for ruby 1.8.7, 1.9.3, rbx and jruby)
+
+From the command line:
+
+```
+bundle exec rake travis
+```
+
+### Release
+
+1. Push the changes to master. This triggers the CI build on TravisCI.
+1. Wait for the build to complete successfully.1. Bump the VERSION number in `lib/engineyard-recipes/version.rb`
+1. Update the ChangeLog.md file
+1. Commit the changes
+1. Release
+
+```
+bundle exec rake release
+```
