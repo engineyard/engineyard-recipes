@@ -26,3 +26,15 @@ Or repos that contain multiple recipes, such as [ey-cloud-recipes](https://githu
 ```
 $ ey-recipes clone git://github.com/engineyard/ey-cloud-recipes.git --path cookbooks/emerge
 ```
+
+Generate scaffolding for a package/service.
+
+```
+$ ey-recipes package newthing
+```
+
+Generate scaffolding for helper function:
+
+```
+$ ey-recipes def myhelpers
+```
