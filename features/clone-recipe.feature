@@ -11,10 +11,12 @@ Feature: Clone recipe from git repositories
     When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/blank"
     Then file "cookbooks/blank/README.rdoc" is created
     And file "cookbooks/blank/README.rdoc" contains "This is a local recipe"
+    And file "cookbooks/main/recipes/default.rb" contains "require_recipe 'blank'"
     And I should see exactly
       """
              exist  cookbooks
             create  cookbooks/blank/README.rdoc
+            append  cookbooks/main/recipes/default.rb
       """
 
   Scenario: Clone a single recipe from local folder with alternate recipe name
@@ -22,10 +24,12 @@ Feature: Clone recipe from git repositories
     When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/blank --name myrecipe"
     Then file "cookbooks/myrecipe/README.rdoc" is created
     And file "cookbooks/myrecipe/README.rdoc" contains "This is a local recipe"
+    And file "cookbooks/main/recipes/default.rb" contains "require_recipe 'myrecipe'"
     And I should see exactly
       """
              exist  cookbooks
             create  cookbooks/myrecipe/README.rdoc
+            append  cookbooks/main/recipes/default.rb
       """
 
   @wip
@@ -40,6 +44,7 @@ Feature: Clone recipe from git repositories
             create  cookbooks/emerge/definitions/package_use.rb
             create  cookbooks/emerge/definitions/update_file.rb
             create  cookbooks/emerge/README.rdoc
+            append  cookbooks/main/recipes/default.rb
       """
     
   @wip
@@ -52,6 +57,7 @@ Feature: Clone recipe from git repositories
              exist  cookbooks
             create  cookbooks/dnapi/libraries/engineyard.rb
             create  cookbooks/dnapi/README.rdoc
+            append  cookbooks/main/recipes/default.rb
       """
     
   

@@ -3,7 +3,10 @@ module Engineyard::Recipes
     extend self
     
     # Fetch the target at URI (git url or local folder path)
-    # Return path to a local folder structure that contains "cookbooks/<recipe name>"
+    #
+    # Returns a tuple:
+    # * path to a local folder structure that contains "cookbooks/<recipe name>"
+    # * recipe_name
     def fetch_recipe(uri, source_root, recipe_name = nil)
       if File.exists?(uri)
         normalize_fetched_project(uri, source_root, recipe_name)
@@ -32,6 +35,10 @@ module Engineyard::Recipes
     # will be a duplicate of +path+
     #
     # Can override the +<recipe>+ name with +recipe_name+
+    #
+    # Returns a tuple:
+    # * path to a local folder structure that contains "cookbooks/<recipe name>"
+    # * recipe_name
     def normalize_fetched_project(path, store_path, recipe_name = nil)
       recipe_name ||= File.basename(path)
       FileUtils.rm_rf(store_path)
@@ -46,6 +53,7 @@ module Engineyard::Recipes
         FileUtils.cp_r(path, File.join(initial_storage, "cookbooks", recipe_name))
       end
       FileUtils.cp_r(initial_storage_cookbooks, store_path)
+      [store_path, recipe_name]
     end
   end
 end

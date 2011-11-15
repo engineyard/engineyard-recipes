@@ -29,8 +29,8 @@ module Engineyard
       def clone(folder_path) # TODO support git URIs
         require 'engineyard-recipes/generators/local_recipe_clone_generator'
         generator = Engineyard::Recipes::Generators::LocalRecipeCloneGenerator
-        local_cookbook_path = FetchUri.fetch_recipe(folder_path, generator.source_root, options["name"])
-        generator.start
+        local_cookbook_path, recipe_name = FetchUri.fetch_recipe(folder_path, generator.source_root, options["name"])
+        generator.start([recipe_name])
       end
       
       desc "version", "show version information"
