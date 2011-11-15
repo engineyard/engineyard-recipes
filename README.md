@@ -27,13 +27,9 @@ Quickly generate recipes from git repositories or local folders.
 Either repos that describe a recipe such as [ey-dnapi](https://github.com/damm/ey-dnapi):
 
 ```
-$ ey-recipes clone git://github.com/damm/ey-dnapi.git
-```
-
-Or repos that contain multiple recipes, such as [ey-cloud-recipes](https://github.com/engineyard/ey-cloud-recipes/tree/master/cookbooks/):
-
-```
-$ ey-recipes clone git://github.com/engineyard/ey-cloud-recipes.git --path cookbooks/emerge
+$ mkdir /tmp/recipes/
+$ git clone git://github.com/damm/ey-dnapi.git /tmp/recipes/ey-dnapi
+$ ey-recipes clone /tmp/recipes/ey-dnapi
 ```
 
 Generate scaffolding for a package/service.
@@ -52,3 +48,67 @@ Generate scaffolding for helper functions:
 $ ey-recipes definition myhelpers some_helper
     create  cookbooks/mylibrary/definitions/helper1.rb
 ```
+
+## Community recipe repos to clone
+
+### Components
+
+* mongodb [[repo](https://github.com/engineyard/ey-cloud-recipes/tree/master/cookbooks/mongodb)]
+
+```
+$ git clone https://github.com/engineyard/ey-cloud-recipes.git /tmp/recipes/ey-cloud-recipes
+$ ey-recipes clone /tmp/recipes/ey-cloud-recipes/cookbooks/mongodb
+```
+
+* [elasticsearch](http://www.elasticsearch.org/)
+
+```
+$ git clone https://github.com/damm/ey-elasticsearch.git /tmp/recipes/ey-elasticsearch
+$ ey-recipes clone /tmp/recipes/ey-elasticsearch -n elasticsearch
+```
+
+* [riak](http://basho.com/products/riak-overview/) [[repo](https://github.com/damm/ey-riak)]
+
+```
+$ git clone https://github.com/damm/ey-riak.git /tmp/recipes/ey-riak
+$ ey-recipes clone /tmp/recipes/ey-riak -n riak
+```
+
+* [riaksearch](http://basho.com/products/riak-overview/) [[repo](https://github.com/damm/ey-riaksearch)]
+
+Either use riak above or riaksearch, not both!
+
+```
+$ git clone https://github.com/damm/ey-riaksearch.git /tmp/recipes/ey-riaksearch
+$ ey-recipes clone /tmp/recipes/ey-riaksearch -n riaksearch
+```
+
+
+
+### Environment Customizations
+
+* database.yml [[repo](https://github.com/damm/ey-database)]
+
+```
+$ git clone https://github.com/damm/ey-database.git /tmp/recipes/ey-database
+$ ey-recipes clone /tmp/recipes/ey-database
+```
+
+Also install ey-dnapi below.
+
+### Helpers
+
+* ey-emerge - additional helpers to install/use masked packages [[repo](https://github.com/damm/ey-emerge)]
+
+```
+$ git clone https://github.com/damm/ey-emerge.git /tmp/recipes/ey-emerge
+$ ey-recipes clone /tmp/recipes/ey-emerge -n emerge
+```
+
+* ey-dnapi - access the internal dna.json metadata via `node[:engineyard]` [[repo](https://github.com/damm/ey-dnapi)]
+
+```
+$ git clone https://github.com/damm/ey-dnapi.git /tmp/recipes/ey-dnapi
+$ ey-recipes clone /tmp/recipes/ey-dnapi -n dnapi
+```
+

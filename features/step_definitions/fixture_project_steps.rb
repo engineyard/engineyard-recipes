@@ -6,9 +6,10 @@ Given /^I am in the "([^\"]*)" project folder$/ do |project|
   end
 end
 
-Given /^I already have cookbooks installed$/ do
-  cookbooks_folder = File.expand_path(File.join(@fixtures_path, "cookbooks"))
-  in_project_folder do
-    FileUtils.cp_r(cookbooks_folder, ".")
-  end
+Given /^I am have a local recipe "([^\"]*)" at "\/tmp\/ey-recipes\/([^"]*)"$/ do |name, repeat_name|
+  name.should == repeat_name
+  fixture_recipe = File.join(@fixtures_path, "recipes", name)
+  FileUtils.rm_rf(File.basename(@tmp_recipes_path))
+  FileUtils.mkdir_p(File.basename(@tmp_recipes_path))
+  FileUtils.cp_r(fixture_recipe, @tmp_recipes_path)
 end
