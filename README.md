@@ -7,7 +7,21 @@ Tools to generate, upload, test and apply chef recipes for Engine Yard Cloud.
 ## Installation
 
     gem install engineyard-recipes
-    
+
+## Quick Guide
+
+```
+$ cd /path/to/my/app
+$ ey-recipes init   # initial scaffolding for cookbooks
+$ ey-recipes recipe somepackage
+$ ey-recipes definition somehelpers specific_helper_method
+$ git clone git://github.com/damm/ey-dnapi.git /tmp/recipes/ey-dnapi
+$ ey-recipes clone /tmp/recipes/ey-dnapi
+
+# then to upload and apply to your environment
+$ ey recipes upload --apply
+```
+
 ## Usage
 
 Getting started:
