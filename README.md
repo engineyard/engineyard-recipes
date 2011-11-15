@@ -36,6 +36,7 @@ $ ey-recipes recipe newthing
     create  cookbooks/newthing/attributes/recipe.rb
     create  cookbooks/newthing/recipes/default.rb
     create  cookbooks/newthing/recipes/install.rb
+    append  cookbooks/main/recipes/default.rb
 ```
 
 Generate scaffolding for helper functions:
