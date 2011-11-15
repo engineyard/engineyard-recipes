@@ -8,6 +8,8 @@ end
 
 Given /^I am have a local recipe "([^\"]*)" at "\/tmp\/ey-recipes\/([^"]*)"$/ do |name, repeat_name|
   name.should == repeat_name
-  # TODO - path must start with /tmp to be safe and global
-  # Copy fixtures/recipes/#{name} to /tmp/#{name}
+  fixture_recipe = File.join(@fixtures_path, "recipes", name)
+  FileUtils.mkdir_p(File.basename(@tmp_recipes_path))
+  FileUtils.rm_rf(@tmp_recipes_path)
+  FileUtils.cp_r(fixture_recipe, @tmp_recipes_path)
 end

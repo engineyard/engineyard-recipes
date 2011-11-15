@@ -10,7 +10,8 @@ Feature: Clone recipe from git repositories
   @wip
   Scenario: Clone a recipe from local folder
     When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/blank --name myrecipe"
-    Then file "cookbooks/emerge/recipes/default.rb" is created
+    Then file "cookbooks/myrecipe/README.rdoc" is created
+    And file "cookbooks/myrecipe/README.rdoc" contains "This is a local recipe"
     And I should see exactly
       """
             create  cookbooks/myrecipe/README.rdoc
