@@ -6,9 +6,8 @@ Given /^I am in the "([^\"]*)" project folder$/ do |project|
   end
 end
 
-Given /^I already have cookbooks installed$/ do
-  cookbooks_folder = File.expand_path(File.join(@fixtures_path, "cookbooks"))
-  in_project_folder do
-    FileUtils.cp_r(cookbooks_folder, ".")
-  end
+Given /^I am have a local recipe "([^\"]*)" at "\/tmp\/ey-recipes\/([^"]*)"$/ do |name, repeat_name|
+  name.should == repeat_name
+  # TODO - path must start with /tmp to be safe and global
+  # Copy fixtures/recipes/#{name} to /tmp/#{name}
 end

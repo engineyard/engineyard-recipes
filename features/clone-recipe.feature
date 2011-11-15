@@ -4,8 +4,18 @@ Feature: Clone recipe from git repositories
   
   Background:
     Given I am in the "rails" project folder
+    Given I am have a local recipe "blank" at "/tmp/ey-recipes/blank"
     When I run local executable "ey-recipes" with arguments "init"
   
+  @wip
+  Scenario: Clone a recipe from local folder
+    When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/blank --name myrecipe"
+    Then file "cookbooks/emerge/recipes/default.rb" is created
+    And I should see exactly
+      """
+            create  cookbooks/myrecipe/README.rdoc
+      """
+
   @wip
   Scenario: Clone a recipe from engineyard/ey-cloud-recipes repository
     When I run local executable "ey-recipes" with arguments "clone git://github.com/engineyard/ey-cloud-recipes.git --recipe emerge"
