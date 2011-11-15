@@ -12,12 +12,14 @@ Feature: Generate package recipe
     And file "cookbooks/new-component/recipes/default.rb" contains "require_recipe 'new-component::install'"
     And file "cookbooks/new-component/recipes/install.rb" is created
     And file "cookbooks/new-component/attributes/recipe.rb" is created
+    And file "cookbooks/main/recipes/default.rb" contains "require_recipe 'new-component'"
     And I should see exactly
       """
              exist  cookbooks
             create  cookbooks/new-component/attributes/recipe.rb
             create  cookbooks/new-component/recipes/default.rb
             create  cookbooks/new-component/recipes/install.rb
+            append  cookbooks/main/recipes/default.rb
       """
   
   Scenario: Generate a recipe that already exists
@@ -29,6 +31,7 @@ Feature: Generate package recipe
          identical  cookbooks/new-component/attributes/recipe.rb
          identical  cookbooks/new-component/recipes/default.rb
          identical  cookbooks/new-component/recipes/install.rb
+            append  cookbooks/main/recipes/default.rb
       """
   
   
