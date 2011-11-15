@@ -25,12 +25,12 @@ module Engineyard
       end
       
       desc "clone URI", "Clone a recipe into cookbook. URI can be git or local path."
+      method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name."
       def clone(folder_path) # TODO support git URIs
         require 'engineyard-recipes/generators/local_recipe_clone_generator'
         generator = Engineyard::Recipes::Generators::LocalRecipeCloneGenerator
-        recipe_name = File.basename(folder_path)
-        local_cookbook_path = FetchUri.fetch_uri(folder_path, generator.source_root)
-        generator.start([recipe_name])
+        local_cookbook_path = FetchUri.fetch_recipe(folder_path, generator.source_root, options["name"])
+        generator.start
       end
       
       desc "version", "show version information"

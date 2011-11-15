@@ -5,8 +5,6 @@ module Engineyard::Recipes
     class LocalRecipeCloneGenerator < Thor::Group
       include Thor::Actions
       
-      argument :recipe_name
-
       def self.source_root
         @tmpdir ||= Dir.mktmpdir
       end
