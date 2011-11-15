@@ -30,11 +30,11 @@ $ ey-recipes clone git://github.com/engineyard/ey-cloud-recipes.git --path cookb
 Generate scaffolding for a package/service.
 
 ```
-$ ey-recipes package newthing
+$ ey-recipes recipe newthing
 ```
 
-Generate scaffolding for helper function:
+Generate scaffolding for helper functions:
 
 ```
-$ ey-recipes def myhelpers
+$ ey-recipes definition myhelpers
 ```

@@ -7,24 +7,26 @@ Feature: Generate package recipe
     When I run local executable "ey-recipes" with arguments "init"
   
   Scenario: Generate a new recipe
-    When I run local executable "ey-recipes" with arguments "package new-component"
+    When I run local executable "ey-recipes" with arguments "recipe new-component"
     And file "cookbooks/new-component/recipes/default.rb" is created
     And file "cookbooks/new-component/recipes/default.rb" contains "require_recipe 'new-component::install'"
     And file "cookbooks/new-component/recipes/install.rb" is created
     And file "cookbooks/new-component/attributes/default.rb" is created
     And I should see exactly
       """
+            create  cookbooks/new-component/recipes
             create  cookbooks/new-component/recipes/default.rb
             create  cookbooks/new-component/recipes/default.rb
             create  cookbooks/new-component/recipes/install.rb
+            create  cookbooks/new-component/attributes
             create  cookbooks/new-component/attributes/default.rb
       
       Lovely.
       """
   
   Scenario: Generate a recipe that already exists
-    When I run local executable "ey-recipes" with arguments "gen new-component"
-    When I run local executable "ey-recipes" with arguments "gen new-component"
+    When I run local executable "ey-recipes" with arguments "recipe new-component"
+    When I run local executable "ey-recipes" with arguments "recipe new-component"
     And I should see exactly
       """
             exists already
