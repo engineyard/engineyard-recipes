@@ -1,3 +1,4 @@
+@wip
 Feature: Clone recipe from git repositories
   I want to quickly generate recipes from existing git repositories
   From either the whole repository or a specific folder
