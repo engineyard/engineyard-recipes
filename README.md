@@ -34,7 +34,7 @@ $ ey-recipes init
     create  cookbooks/main/recipes/default.rb
 ```
 
-Quickly generate recipes from git repositories or local folders.
+Quickly generate recipes from git repositories or local folders. See bottom of README for community examples.
 
 Either repos that describe a recipe such as [ey-dnapi](https://github.com/damm/ey-dnapi):
 
@@ -53,6 +53,14 @@ $ ey-recipes recipe newthing
     create  cookbooks/newthing/recipes/install.rb
     append  cookbooks/main/recipes/default.rb
 ```
+
+Specify an explicit Gentoo package.
+
+```
+$ ey-recipes recipe gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028
+```
+
+To use a masked package, pass the `--unmasked/-u` flag, and install the `emerge` helper described below.
 
 Generate scaffolding for helper functions:
 
