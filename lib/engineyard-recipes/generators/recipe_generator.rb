@@ -6,6 +6,9 @@ module Engineyard::Recipes
       include Thor::Actions
       
       argument :recipe_name
+      argument :package
+      argument :version
+      argument :unmasked, :optional => true
 
       def self.source_root
         File.join(File.dirname(__FILE__), "recipe_generator", "templates")
@@ -29,6 +32,10 @@ module Engineyard::Recipes
       private
       def say(msg, color = nil)
         color ? shell.say(msg, color) : shell.say(msg)
+      end
+      
+      def known_package?
+        package =~ /UNKNOWN/
       end
     end
   end

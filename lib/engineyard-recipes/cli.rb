@@ -13,9 +13,16 @@ module Engineyard
       end
       
       desc "recipe RECIPE", "Generate recipe for a package"
+      method_option :package, :aliases => ['-p'], :desc => "Gentoo package name, e.g. dev-util/gitosis-gentoo"
+      method_option :version, :aliases => ['-v'], :desc => "Gentoo package version, e.g. 0.2_p20081028"
+      method_options %w( unmasked -u ) => :boolean, :desc => "Unmask the required gentoo package"
       def recipe(recipe_name)
+        package       = options["package"] || "UNKNOWN/#{recipe_name}"
+        version       = options["version"] || '1.0.0'
+        unmasked      = options["unmasked"] || false
+
         require 'engineyard-recipes/generators/recipe_generator'
-        Engineyard::Recipes::Generators::RecipeGenerator.start([recipe_name])
+        Engineyard::Recipes::Generators::RecipeGenerator.start([recipe_name, package, version, unmasked])
       end
       
       desc "definition RECIPE DEFINITION", "Generate recipe for a package"

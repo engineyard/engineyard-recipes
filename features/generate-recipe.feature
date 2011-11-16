@@ -34,29 +34,50 @@ Feature: Generate package recipe
             append  cookbooks/main/recipes/default.rb
       """
 
-  @wip
-  Scenario: Generate a new recipe for a specific package/version
-    When I run local executable "ey-recipes" with arguments "recipe gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028 --unmask"
+  Scenario: Generate a new recipe for a specific package/version that is stable
+    When I run local executable "ey-recipes" with arguments "recipe gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028"
     And file "cookbooks/gitosis/recipes/default.rb" is created
     And file "cookbooks/gitosis/recipes/default.rb" contains "require_recipe 'gitosis::install'"
     And file "cookbooks/gitosis/recipes/install.rb" is created
     And file "cookbooks/gitosis/attributes/recipe.rb" is created
     And file "cookbooks/gitosis/attributes/recipe.rb" contains "gitosis_version('0.2_p20081028')"
-    And file "cookbooks/gitosis/recipes/default.rb" contains
+    And file "cookbooks/gitosis/recipes/install.rb" contains
     """
     #
     # Cookbook Name:: gitosis
     # Recipe:: install
     #
 
-    enable_package "dev-util/gitosis-gentoo" do
-      version node[:gitosis_version]
-    end
-
-    package "dev-util/gitosis-gentoo" do
+    package 'dev-util/gitosis-gentoo' do
       version node[:gitosis_version]
       action :install
     end
+
+    """    
+
+  Scenario: Generate a new recipe for a specific package/version that is masked
+    When I run local executable "ey-recipes" with arguments "recipe gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028 -u"
+    And file "cookbooks/gitosis/recipes/default.rb" is created
+    And file "cookbooks/gitosis/recipes/default.rb" contains "require_recipe 'gitosis::install'"
+    And file "cookbooks/gitosis/recipes/install.rb" is created
+    And file "cookbooks/gitosis/attributes/recipe.rb" is created
+    And file "cookbooks/gitosis/attributes/recipe.rb" contains "gitosis_version('0.2_p20081028')"
+    And file "cookbooks/gitosis/recipes/install.rb" contains
+    """
+    #
+    # Cookbook Name:: gitosis
+    # Recipe:: install
+    #
+
+    enable_package 'dev-util/gitosis-gentoo' do
+      version node[:gitosis_version]
+    end
+
+    package 'dev-util/gitosis-gentoo' do
+      version node[:gitosis_version]
+      action :install
+    end
+    
     """    
 
   

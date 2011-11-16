@@ -1,1 +1,1 @@
-<%= recipe_name %>_version('1.0.0')
+<%= recipe_name %>_version('<%= version %>')
