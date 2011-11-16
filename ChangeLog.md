@@ -8,3 +8,8 @@ Initial set of commands:
 * `recipe` - generate a scaffold for a new recipe
 * `definition` - generate a scaffold for a helper definition
 
+Patches:
+
+### v0.1.1
+
+* `clone` - When cloning a recipe folder, don't insert require_recipe if the folder doesn't have a recipe folder
