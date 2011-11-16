@@ -21,7 +21,7 @@ module Engineyard::Recipes
         unless File.exists?(file_path)
           puts "Skipping auto-require of package recipe: #{file} is missing"
         else
-          require_recipe = "require_recipe '#{recipe_name}'"
+          require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
           append_to_file file, require_recipe
         end
       end

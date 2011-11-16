@@ -16,6 +16,7 @@ Feature: Clone recipe from git repositories
       """
              exist  cookbooks
             create  cookbooks/blank/README.rdoc
+            create  cookbooks/blank/recipes/default.rb
             append  cookbooks/main/recipes/default.rb
       """
 
@@ -29,9 +30,22 @@ Feature: Clone recipe from git repositories
       """
              exist  cookbooks
             create  cookbooks/myrecipe/README.rdoc
+            create  cookbooks/myrecipe/recipes/default.rb
             append  cookbooks/main/recipes/default.rb
       """
 
+  Scenario: Clone recipe repo, do not auto-require if no recipe
+    Given I am have a local recipe "library" at "/tmp/ey-recipes/library"
+    When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/library"
+    Then file "cookbooks/library/libraries/mylib.rb" is created
+    And file "cookbooks/main/recipes/default.rb" does not contain "require_recipe 'library'"
+    And I should see exactly
+      """
+             exist  cookbooks
+            create  cookbooks/library/README.rdoc
+            create  cookbooks/library/libraries/mylib.rb
+      """
+  
   @wip
   Scenario: Clone a recipe from engineyard/ey-cloud-recipes repository
     Given I am have a local recipe "blank" at "/tmp/ey-recipes/blank"

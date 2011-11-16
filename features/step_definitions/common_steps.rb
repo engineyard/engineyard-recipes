@@ -104,6 +104,14 @@ Then /^file "([^"]*)" contains "([^"]*)"$/ do |file, text|
   end
 end
 
+Then /^file "([^"]*)" does not contain "([^"]*)"$/ do |file, text|
+  in_project_folder do
+    actual_output = File.read(file)
+    actual_output.should_not contain(text)
+  end
+end
+
+
 
 Then /gem file "(.*)" and generated file "(.*)" should be the same/ do |gem_file, project_file|
   File.exists?(gem_file).should be_true
