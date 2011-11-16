@@ -1,1 +1,5 @@
+<% unless known_package? -%>
 <%= recipe_name %>_version('<%= version %>')
+<% else -%>
+# <%= recipe_name %>_version('<%= version %>')
+<% end %>

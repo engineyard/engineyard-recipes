@@ -12,6 +12,7 @@ Feature: Generate package recipe
     And file "cookbooks/new-component/recipes/default.rb" contains "require_recipe 'new-component::install'"
     And file "cookbooks/new-component/recipes/install.rb" is created
     And file "cookbooks/new-component/attributes/recipe.rb" is created
+    And file "cookbooks/new-component/attributes/recipe.rb" contains "# new-component_version('1.0.0')"
     And file "cookbooks/main/recipes/default.rb" contains "require_recipe 'new-component'"
     And I should see exactly
       """
@@ -62,6 +63,7 @@ Feature: Generate package recipe
     And file "cookbooks/gitosis/recipes/install.rb" is created
     And file "cookbooks/gitosis/attributes/recipe.rb" is created
     And file "cookbooks/gitosis/attributes/recipe.rb" contains "gitosis_version('0.2_p20081028')"
+    And file "cookbooks/gitosis/attributes/recipe.rb" does not contain "# gitosis_version('0.2_p20081028')"
     And file "cookbooks/gitosis/recipes/install.rb" contains
     """
     #
