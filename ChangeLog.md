@@ -17,3 +17,7 @@ Patches:
 ### v0.1.2
 
 * `recipe` - can take --package/--version/--unmasked options
+
+### v0.1.3
+
+* `recipe` - if a package isn't specified then comment out the attributes/recipe.rb code as example only
