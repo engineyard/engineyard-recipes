@@ -33,4 +33,11 @@ Given /^project is a git repository$/ do
     `git add .`
     `git commit -m 'Ready for testing'`
   end
+
+Given /^I have my environment booted or an EY Local VM running$/ do
+  puts "No implemented"
+end
+
+Given /^I am expecting an eix portage search for "([^"]*)"$/ do |arg1|
+  puts "No implemented"
 end

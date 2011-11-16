@@ -2,13 +2,6 @@ Feature: Search portage
   I want to know what packages are available in EY Gentoo Portage
   And what version numbers they have
   
-  @wip
-  Scenario: Show help for portage task
-    Given I have my environment booted or an EY Local VM running
-    When I run local executable "ey-recipes" with arguments "portage"
-    Then I see help for "portage" command
-
-  @wip
   Scenario: Ask for environment to be booted
     When I run local executable "ey-recipes" with arguments "portage redis"
     Then I should see exactly

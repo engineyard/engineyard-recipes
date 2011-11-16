@@ -49,6 +49,11 @@ module Engineyard
       rescue Engineyard::Recipes::FetchUri::UnknownPath => e
         error "No recipe found at #{e.message}"
       end
+
+      desc "portage FILTER", "Search for Gentoo portage packages"
+      def portage(filter)
+        error "To search for portage packages we please need an environment to be selected and booted"
+      end
       
       desc "sm URI [COMMANDS]", "Wrap an SM extension as an eychef recipe"
       method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name.", :required => true
