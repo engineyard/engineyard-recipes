@@ -113,8 +113,8 @@ Also install ey-dnapi below.
 * ey-emerge - additional helpers to install/use masked packages [[repo](https://github.com/damm/ey-emerge)]
 
 ```
-$ git clone https://github.com/damm/ey-emerge.git /tmp/recipes/ey-emerge
-$ ey-recipes clone /tmp/recipes/ey-emerge -n emerge
+$ git clone https://github.com/engineyard/ey-cloud-recipes.git /tmp/recipes/ey-cloud-recipes
+$ ey-recipes clone /tmp/recipes/ey-cloud-recipes/cookbooks/emerge
 ```
 
 * ey-dnapi - access the internal dna.json metadata via `node[:engineyard]` [[repo](https://github.com/damm/ey-dnapi)]
