@@ -13,3 +13,7 @@ Patches:
 ### v0.1.1
 
 * `clone` - When cloning a recipe folder, don't insert require_recipe if the folder doesn't have a recipe folder
+
+### v0.1.2
+
+* `recipe` - can take --package/--version/--unmasked options
