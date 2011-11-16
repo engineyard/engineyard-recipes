@@ -13,6 +13,7 @@ Feature: Search portage
     When I run local executable "ey-recipes" with arguments "portage redis"
     Then I should see exactly
       """
+      Found 14 redis versions. Run the following to enable package:
       ey-recipes recipe redis -p 'dev-db/redis'	-v '1.0-r1!p'
       ey-recipes recipe redis -p 'dev-db/redis'	-v '1.01!p'
       ey-recipes recipe redis -p 'dev-db/redis'	-v '1.2.1!p'
@@ -36,6 +37,7 @@ Feature: Search portage
     When I run local executable "ey-recipes" with arguments "portage gitosis"
     Then I should see exactly
       """
+      Found 6 gitosis versions. Run the following to enable package:
       ey-recipes recipe gitosis -p 'dev-util/gitosis' -v '0.2_p20080626' -u
       ey-recipes recipe gitosis -p 'dev-util/gitosis' -v '0.2_p20080825' -u
       ey-recipes recipe gitosis -p 'dev-util/gitosis-gentoo' -v '0.2_p20080825' -u
@@ -50,6 +52,7 @@ Feature: Search portage
     When I run local executable "ey-recipes" with arguments "portage virtual/mysql"
     Then I should see exactly
       """
+      Found 7 virtual/mysql versions. Run the following to enable package:
       ey-recipes recipe mysql -p 'dev-util/mysql' -v '4.0'
       ey-recipes recipe mysql -p 'dev-util/mysql' -v '4.1'
       ey-recipes recipe mysql -p 'dev-util/mysql' -v '5.0' # already installed
