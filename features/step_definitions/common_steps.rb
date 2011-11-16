@@ -104,6 +104,12 @@ Then /^file "([^"]*)" contains "([^"]*)"$/ do |file, text|
   end
 end
 
+Then /^file "([^"]*)" contains$/ do |file, text|
+  actual_output = File.read(file)
+  actual_output.should == text
+end
+
+
 Then /^file "([^"]*)" does not contain "([^"]*)"$/ do |file, text|
   in_project_folder do
     actual_output = File.read(file)
