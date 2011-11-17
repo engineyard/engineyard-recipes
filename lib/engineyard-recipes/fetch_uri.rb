@@ -46,7 +46,6 @@ module Engineyard::Recipes
       initial_storage = Dir.mktmpdir
       initial_storage_cookbooks = File.join(initial_storage, "cookbooks")
       if File.directory?(File.join(path, "cookbooks"))
-        # FIXME untested
         FileUtils.cp_r("#{path}/", initial_storage)
       else
         FileUtils.mkdir_p(initial_storage_cookbooks)
