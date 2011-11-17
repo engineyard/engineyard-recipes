@@ -71,10 +71,11 @@ Given /^I am expecting an eix portage search for "([^"]*)"$/ do |filter|
       { :recipe => 'dev-util/mysql', :version => '4.0' },
       { :recipe => 'dev-util/mysql', :version => '4.1' },
       { :recipe => 'dev-util/mysql', :version => '5.0', :installed => true },
-      { :recipe => 'dev-util/mysql', :version => '5.0[1]' },
+      # { :recipe => 'dev-util/mysql', :version => '5.0[1]' },
       { :recipe => 'dev-util/mysql', :version => '5.1' :unmasked => true },
-      { :recipe => 'dev-util/mysql', :version => '5.1[1]' :unmasked => true },
-      { :recipe => 'dev-util/mysql', :version => '5.5[1]' :unmasked => true }
+      # { :recipe => 'dev-util/mysql', :version => '5.1[1]' :unmasked => true },
+      { :recipe => 'dev-util/mysql', :version => '5.5' :unmasked => true }
+      # { :recipe => 'dev-util/mysql', :version => '5.5[1]' :unmasked => true }
     ]
   else
     []
