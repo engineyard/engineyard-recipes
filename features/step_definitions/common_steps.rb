@@ -49,7 +49,11 @@ When /^I run local executable "(.*)" with arguments "(.*)"/ do |executable, argu
     require 'engineyard-recipes/cli'
     in_project_folder do
       stdout, stderr = capture_stdios do
-        Engineyard::Recipes::CLI.start(arguments.split(/ /))
+        begin
+          Engineyard::Recipes::CLI.start(arguments.split(/ /))
+        rescue SystemExit => e
+          @system_exit = true
+        end
       end
       @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
       File.open(@stdout, "w") {|f| f << stdout; f << stderr}
