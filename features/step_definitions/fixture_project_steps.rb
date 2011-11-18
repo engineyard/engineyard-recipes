@@ -47,24 +47,24 @@ Given /^I am expecting an eix portage search for "([^"]*)"$/ do |filter|
       { :recipe => 'dev-db/redis', :version => '1.01!p' },
       { :recipe => 'dev-db/redis', :version => '1.2.1!p' },
       { :recipe => 'dev-db/redis', :version => '1.2.2!p' },
-      { :recipe => 'dev-db/redis', :version => '1.2.5!p' :unmasked => true },
+      { :recipe => 'dev-db/redis', :version => '1.2.5!p', :unmasked => true },
       { :recipe => 'dev-db/redis', :version => '1.2.6!p' },
-      { :recipe => 'dev-db/redis', :version => '1.3.7_pre1!p' :unmasked => true },
-      { :recipe => 'dev-db/redis', :version => '1.3.12_pre1!p' :unmasked => true },
-      { :recipe => 'dev-db/redis', :version => '2.0.1!p' :unmasked => true },
-      { :recipe => 'dev-db/redis', :version => '2.0.2!p' :unmasked => true },
-      { :recipe => 'dev-db/redis', :version => '2.0.4!p' :unmasked => true },
-      { :recipe => 'dev-db/redis', :version => '2.2.4!p' :unmasked => true },
+      { :recipe => 'dev-db/redis', :version => '1.3.7_pre1!p', :unmasked => true },
+      { :recipe => 'dev-db/redis', :version => '1.3.12_pre1!p', :unmasked => true },
+      { :recipe => 'dev-db/redis', :version => '2.0.1!p', :unmasked => true },
+      { :recipe => 'dev-db/redis', :version => '2.0.2!p', :unmasked => true },
+      { :recipe => 'dev-db/redis', :version => '2.0.4!p', :unmasked => true },
+      { :recipe => 'dev-db/redis', :version => '2.2.4!p', :unmasked => true },
       { :recipe => 'dev-db/redis', :version => '2.2.11!p', :unmasked => true, :installed => true },
       { :recipe => 'dev-db/redis', :version => '2.4.0!p', :unmasked => true }
     ]
   when "gitosis"
     [
-      { :recipe => 'dev-util/gitosis', :version => '0.2_p20080626' :unmasked => true },
-      { :recipe => 'dev-util/gitosis', :version => '0.2_p20080825' :unmasked => true },
-      { :recipe => 'dev-util/gitosis-gentoo', :version => '0.2_p20080825' :unmasked => true },
-      { :recipe => 'dev-util/gitosis-gentoo', :version => '0.2_p20080711' :unmasked => true },
-      { :recipe => 'dev-util/gitosis-gentoo', :version => '0.2_p20081028' :unmasked => true }
+      { :recipe => 'dev-util/gitosis', :version => '0.2_p20080626', :unmasked => true },
+      { :recipe => 'dev-util/gitosis', :version => '0.2_p20080825', :unmasked => true },
+      { :recipe => 'dev-util/gitosis-gentoo', :version => '0.2_p20080825', :unmasked => true },
+      { :recipe => 'dev-util/gitosis-gentoo', :version => '0.2_p20080711', :unmasked => true },
+      { :recipe => 'dev-util/gitosis-gentoo', :version => '0.2_p20081028', :unmasked => true }
     ]
   when "virtual/mysql"
     [
@@ -72,10 +72,10 @@ Given /^I am expecting an eix portage search for "([^"]*)"$/ do |filter|
       { :recipe => 'dev-util/mysql', :version => '4.1' },
       { :recipe => 'dev-util/mysql', :version => '5.0', :installed => true },
       # { :recipe => 'dev-util/mysql', :version => '5.0[1]' },
-      { :recipe => 'dev-util/mysql', :version => '5.1' :unmasked => true },
-      # { :recipe => 'dev-util/mysql', :version => '5.1[1]' :unmasked => true },
-      { :recipe => 'dev-util/mysql', :version => '5.5' :unmasked => true }
-      # { :recipe => 'dev-util/mysql', :version => '5.5[1]' :unmasked => true }
+      { :recipe => 'dev-util/mysql', :version => '5.1', :unmasked => true },
+      # { :recipe => 'dev-util/mysql', :version => '5.1[1]', :unmasked => true },
+      { :recipe => 'dev-util/mysql', :version => '5.5', :unmasked => true }
+      # { :recipe => 'dev-util/mysql', :version => '5.5[1]', :unmasked => true }
     ]
   else
     []
