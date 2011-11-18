@@ -6,12 +6,8 @@ require 'engineyard-recipes/cli'
 
 begin
   Engineyard::Recipes::CLI.start
-rescue EY::Error => e
-  EY.ui.print_exception(e)
-  exit(1)
 rescue Interrupt => e
   puts
-  EY.ui.print_exception(e)
-  EY.ui.say("Quitting...")
+  puts "Quitting..."
   exit(1)
 end
