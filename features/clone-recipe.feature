@@ -46,6 +46,13 @@ Feature: Clone recipe from git repositories
             create  cookbooks/library/libraries/mylib.rb
       """
   
+  Scenario: Clone URI is an unknown local path
+    When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/UNKNOWN"
+    And I should see exactly
+      """
+      ERROR: No recipe found at /tmp/ey-recipes/UNKNOWN
+      """
+  
   @wip
   Scenario: Clone a recipe from engineyard/ey-cloud-recipes repository
     Given I am have a local recipe "blank" at "/tmp/ey-recipes/blank"

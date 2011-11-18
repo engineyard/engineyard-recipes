@@ -2,6 +2,8 @@ module Engineyard::Recipes
   module FetchUri
     extend self
     
+    class UnknownPath < StandardError; end
+    
     # Fetch the target at URI (git url or local folder path)
     #
     # Returns a tuple:
@@ -10,6 +12,8 @@ module Engineyard::Recipes
     def fetch_recipe(uri, source_root, recipe_name = nil)
       if File.exists?(uri)
         normalize_fetched_project(uri, source_root, recipe_name)
+      else
+        raise UnknownPath, uri
       end
     end
     

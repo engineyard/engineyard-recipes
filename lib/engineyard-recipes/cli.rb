@@ -38,6 +38,8 @@ module Engineyard
         generator = Engineyard::Recipes::Generators::LocalRecipeCloneGenerator
         local_cookbook_path, recipe_name = FetchUri.fetch_recipe(folder_path, generator.source_root, options["name"])
         generator.start([recipe_name])
+      rescue Engineyard::Recipes::FetchUri::UnknownPath => e
+        error "No recipe found at #{e.message}"
       end
       
       desc "version", "show version information"
