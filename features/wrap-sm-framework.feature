@@ -44,7 +44,7 @@ Feature: Wrap SM framework extension
 
   @wip
   Scenario: Wrap an SM extension and vendor it as submodule
-    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule" 
+    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule repo" 
     Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../repo', __FILE__))"
     Then file ".gitmodules" contains
       """

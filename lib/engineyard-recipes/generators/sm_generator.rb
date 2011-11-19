@@ -9,6 +9,7 @@ module Engineyard::Recipes
       argument :recipe_name
       argument :sm_ext_uri
       argument :sm_ext_commands, :type => :array
+      argument :sm_local_path, :required => false
 
       def self.source_root
         File.join(File.dirname(__FILE__), "sm_generator", "templates")

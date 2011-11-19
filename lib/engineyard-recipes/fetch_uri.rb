@@ -17,7 +17,7 @@ module Engineyard::Recipes
       end
     end
     
-    def clone_recipe_into_recipe(uri, recipe_name = nil, repo_folder = 'repo')
+    def submodule_recipe_into_recipe(uri, submodule_folder, recipe_name = nil)
       if File.exists?(uri)
         normalize_fetched_project(uri, source_root, recipe_name)
       else

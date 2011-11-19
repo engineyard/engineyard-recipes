@@ -50,10 +50,15 @@ module Engineyard
       
       desc "sm URI [COMMANDS]", "Wrap an SM extension as an eychef recipe"
       method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name.", :required => true
+      method_option :submodule, :desc => "Submodule the URI into recipe folder name"
       def sm(uri, *commands)
         require 'engineyard-recipes/generators/sm_generator'
-        recipe_name = options["name"]
-        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri, commands])
+        recipe_name      = options["name"]
+        submodule_folder = options["submodule"] # optional
+        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri, commands, submodule_folder])
+        if submodule_folder
+          FetchUri.submodule_recipe_into_recipe(uri, submodule_folder, recipe_name)
+        end
       end
       
       desc "version", "show version information"
