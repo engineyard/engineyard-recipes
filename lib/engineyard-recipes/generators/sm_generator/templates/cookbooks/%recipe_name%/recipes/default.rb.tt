@@ -1,4 +1,4 @@
 require_recipe '<%= recipe_name %>::install_sm_ext'
 <% sm_ext_commands.each do |command| -%>
-  require_recipe '<%= recipe_name %>::<%= command %>'
+require_recipe '<%= recipe_name %>::<%= command %>'
 <% end -%>

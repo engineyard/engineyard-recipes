@@ -49,7 +49,7 @@ module Engineyard
       end
       
       desc "sm URI [COMMANDS]", "Wrap an SM extension as an eychef recipe"
-      method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name."
+      method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name.", :required => true
       def sm(uri, *commands)
         require 'engineyard-recipes/generators/sm_generator'
         recipe_name = options["name"]
