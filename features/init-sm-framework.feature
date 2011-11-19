@@ -6,7 +6,6 @@ Feature: Setup your EY Cloud cookbook to use SM framework extensions
     Given I am in the "rails" project folder
     When I run local executable "ey-recipes" with arguments "init"
   
-  @wip
   Scenario: Wrap a 
     When I run local executable "ey-recipes" with arguments "init-sm"
     Then file "cookbooks/sm/recipes/default.rb" contains "require_recipe 'sm::install'"
