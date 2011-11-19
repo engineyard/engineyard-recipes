@@ -48,6 +48,14 @@ module Engineyard
         error "No recipe found at #{e.message}"
       end
       
+      desc "sm URI [COMMANDS]", "Wrap an SM extension as an eychef recipe"
+      method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name."
+      def sm(uri, *commands)
+        require 'engineyard-recipes/generators/sm_generator'
+        recipe_name = options["name"]
+        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri])
+      end
+      
       desc "version", "show version information"
       def version
         require 'engineyard-recipes/version'

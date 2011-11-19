@@ -1,0 +1,1 @@
+sm_<%= recipe_name %>_uri('<%= sm_ext_uri %>')

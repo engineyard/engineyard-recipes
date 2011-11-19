@@ -17,6 +17,14 @@ module Engineyard::Recipes
       end
     end
     
+    def clone_recipe_into_recipe(uri, recipe_name = nil, repo_folder = 'repo')
+      if File.exists?(uri)
+        normalize_fetched_project(uri, source_root, recipe_name)
+      else
+        raise UnknownPath, uri
+      end
+    end
+    
     # Takes a folder that is either a cookbooks/<recipes> structure, or
     # assumed to be a singular <recipe>/
     # Copies it into +store_path+ and resulting folder
