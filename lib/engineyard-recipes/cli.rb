@@ -53,7 +53,7 @@ module Engineyard
       def sm(uri, *commands)
         require 'engineyard-recipes/generators/sm_generator'
         recipe_name = options["name"]
-        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri])
+        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri, commands])
       end
       
       desc "version", "show version information"

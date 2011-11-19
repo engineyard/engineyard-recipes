@@ -21,7 +21,6 @@ Feature: Wrap SM framework extension
             append  cookbooks/main/recipes/default.rb
       """
 
-  @wip
   Scenario: Wrap an SM extension only and trigger its commands
     When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git install configure start --name jenkins"
     Then file "cookbooks/jenkins/recipes/default.rb" contains "require_recipe 'jenkins::install_sm_ext'"
