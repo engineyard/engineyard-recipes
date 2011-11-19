@@ -1,5 +1,5 @@
-Feature: Wrap SM framework projects
-  I want to write my customizations in SM framework
+Feature: Wrap SM framework extension
+  I want to write my customizations in SM framework extensions
   And have them work on EY Cloud
   
   @wip

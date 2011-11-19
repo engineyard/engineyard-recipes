@@ -12,6 +12,12 @@ module Engineyard
         Engineyard::Recipes::Generators::InitGenerator.start
       end
       
+      desc "init-sm", "Setup your EY Cloud cookbook to use SM framework extensions"
+      def init_sm
+        require 'engineyard-recipes/generators/init_sm_generator'
+        Engineyard::Recipes::Generators::InitSmGenerator.start
+      end
+      
       desc "recipe RECIPE", "Generate recipe for a package"
       method_option :package, :aliases => ['-p'], :desc => "Gentoo package name, e.g. dev-util/gitosis-gentoo"
       method_option :version, :aliases => ['-v'], :desc => "Gentoo package version, e.g. 0.2_p20081028"
