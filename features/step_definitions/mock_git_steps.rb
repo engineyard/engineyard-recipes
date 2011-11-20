@@ -10,3 +10,12 @@ Then /^git command "([^"]*)" is run$/ do |command|
   end
 end
 
+
+Then /^git command "([^"]*)" is not run$/ do |command|
+  in_tmp_folder do
+    if File.exists? 'git.log'
+      File.read('git.log').should_not =~ /^#{command}$/
+    end
+  end
+end
+

@@ -21,11 +21,11 @@ module Engineyard::Recipes
     # If +uri+ is a local folder, then copy folder to +sm_vendor_path+
     # If +uri+ is a remote git repo, then submodule to +sm_vendor_path+
     def vendor_recipe_into_recipe(uri, sm_vendor_path)
-      # TODO - TDD this
-      
-      # flags = ""
-      # flags += " --local" if File.exists?(uri)
-      # `git submodule add #{flags} #{uri} #{sm_vendor_path}`
+      if File.exists?(uri)
+        FileUtils.cp_r(uri, sm_vendor_path)
+      else 
+        `git submodule add #{uri} #{sm_vendor_path}`
+      end
     end
     
     # Takes a folder that is either a cookbooks/<recipes> structure, or

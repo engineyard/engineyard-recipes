@@ -2,7 +2,7 @@ $:.unshift(File.expand_path(File.dirname(__FILE__) + '/../../lib'))
 require 'bundler/setup'
 require 'engineyard-recipes'
 
-path = ENV['PATH']
+original_path = ENV['PATH']
 
 Before do
   @tmp_root      = File.dirname(__FILE__) + "/../../tmp"
@@ -17,5 +17,5 @@ Before do
   FileUtils.mkdir_p @tmp_recipes_path
   ENV['HOME'] = @home_path
   fixture_bin_path = File.expand_path('../../../fixtures/bin', __FILE__)
-  ENV['PATH'] = fixture_bin_path + ":" + path
+  ENV['PATH'] = fixture_bin_path + ":" + original_path
 end

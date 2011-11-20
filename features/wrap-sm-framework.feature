@@ -43,12 +43,12 @@ Feature: Wrap SM framework extension
             append  cookbooks/main/recipes/default.rb
       """
 
-  @wip
   Scenario: Wrap a local SM extension and vendor it
     Given I am have a local sm extension "local_sm_repo" at "/tmp/ey-recipes/local_sm_repo"
     When I run local executable "ey-recipes" with arguments "sm /tmp/ey-recipes/local_sm_repo --name jenkins --submodule repo" 
     Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../../../cookbooks/jenkins/repo', __FILE__))"
-    Then file "cookbooks/jenkins/repo/local_sm_repo_readme.md" is created
+    And git command "git submodule add https://github.com/eystacks/sm_jenkins.git cookbooks/jenkins/repo" is not run
+    And file "cookbooks/jenkins/repo/local_sm_repo_readme.md" is created
 
   @wip
   Scenario: Wrap a git SM extension and vendor it via submodules
