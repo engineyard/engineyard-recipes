@@ -20,10 +20,14 @@ Feature: Setup your EY Cloud cookbook to use SM framework extensions
   Scenario: Create new EY CLoud custom cookbooks with SM extensions
     Given I am in the "rails" project folder
     When I run local executable "ey-recipes" with arguments "init --sm"
-    Then file "cookbooks/sm/recipes/default.rb" contains "require_recipe 'sm::install'"
-    Then file "cookbooks/sm/recipes/install.rb" contains "curl -L -s https://github.com/sm/sm/tarball/master -o sm-master.tar.gz"
     And I should see exactly
       """
+            create  cookbooks
+            create  cookbooks/main/attributes/recipe.rb
+            create  cookbooks/main/definitions/ey_cloud_report.rb
+            create  cookbooks/main/libraries/ruby_block.rb
+            create  cookbooks/main/libraries/run_for_app.rb
+            create  cookbooks/main/recipes/default.rb
              exist  cookbooks
             create  cookbooks/sm/attributes/recipe.rb
             create  cookbooks/sm/recipes/default.rb

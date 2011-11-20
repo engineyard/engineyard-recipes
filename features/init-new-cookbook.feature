@@ -13,6 +13,4 @@ Feature: Generate a new custom cookbook for your EY Cloud environments
             create  cookbooks/main/libraries/ruby_block.rb
             create  cookbooks/main/libraries/run_for_app.rb
             create  cookbooks/main/recipes/default.rb
-      
-      Lovely.
       """

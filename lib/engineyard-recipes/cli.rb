@@ -7,9 +7,11 @@ module Engineyard
     class CLI < Thor
 
       desc "init", "Creates cookbooks scaffolding for your recipes"
+      method_option :sm, :type => :boolean
       def init
         require 'engineyard-recipes/generators/init_generator'
         Engineyard::Recipes::Generators::InitGenerator.start
+        init_sm if options[:sm]
       end
       
       desc "init-sm", "Setup your EY Cloud cookbook to use SM framework extensions"
