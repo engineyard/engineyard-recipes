@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "fileutils"
+require "escape"
+
+git_mock_log = File.expand_path("../../../tmp/git.log", __FILE__)
+File.open(git_mock_log, "a") { |file| file << Escape.shell_command(ARGV); file << "\n" }
