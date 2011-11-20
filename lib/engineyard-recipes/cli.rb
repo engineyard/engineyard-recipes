@@ -7,7 +7,7 @@ module Engineyard
     class CLI < Thor
 
       desc "init", "Creates cookbooks scaffolding for your recipes"
-      method_option :sm, :type => :boolean
+      method_option :sm, :type => :boolean, :desc => "Also install SM framework support"
       def init
         require 'engineyard-recipes/generators/init_generator'
         Engineyard::Recipes::Generators::InitGenerator.start
