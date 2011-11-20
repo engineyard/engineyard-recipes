@@ -1,6 +1,7 @@
 module Engineyard::Recipes
   module FetchUri
     extend self
+    extend Engineyard::Recipes::GitCmd
     
     class UnknownPath < StandardError; end
     
@@ -24,7 +25,7 @@ module Engineyard::Recipes
       if File.exists?(uri)
         FileUtils.cp_r(uri, sm_vendor_path)
       else 
-        `git submodule add #{uri} #{sm_vendor_path}`
+        git "submodule add #{uri} #{sm_vendor_path}"
       end
     end
     

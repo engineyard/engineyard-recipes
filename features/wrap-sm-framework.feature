@@ -50,7 +50,6 @@ Feature: Wrap SM framework extension
     And git command "git submodule add https://github.com/eystacks/sm_jenkins.git cookbooks/jenkins/repo" is not run
     And file "cookbooks/jenkins/repo/local_sm_repo_readme.md" is created
 
-  @wip
   Scenario: Wrap a git SM extension and vendor it via submodules
     Given I mock out git commands
     When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule repo" 
