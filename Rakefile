@@ -1,5 +1,10 @@
 require "bundler/gem_tasks"
 
+require 'rspec/core/rake_task'
+
+desc "Run all examples"
+RSpec::Core::RakeTask.new
+
 namespace :cucumber do
   require 'cucumber/rake/task'
   Cucumber::Rake::Task.new(:wip, 'Run features that are being worked on') do |t|
@@ -19,4 +24,4 @@ end
 desc 'Alias for cucumber:ok'
 task :cucumber => 'cucumber:ok'
 
-task :default => ["cucumber"]
+task :default => ["spec", "cucumber"]
