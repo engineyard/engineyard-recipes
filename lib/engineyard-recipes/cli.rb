@@ -54,10 +54,12 @@ module Engineyard
       def sm(uri, *commands)
         require 'engineyard-recipes/generators/sm_generator'
         recipe_name      = options["name"]
-        submodule_folder = options["submodule"] # optional
-        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri, commands, submodule_folder])
-        if submodule_folder
-          FetchUri.submodule_recipe_into_recipe(uri, submodule_folder, recipe_name)
+        if options["submodule"]
+          sm_vendor_path = File.join("cookbooks", recipe_name, options["submodule"])
+        end
+        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri, commands, sm_vendor_path])
+        if sm_vendor_path
+          FetchUri.vendor_recipe_into_recipe(uri, sm_vendor_path)
         end
       end
       

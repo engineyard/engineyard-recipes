@@ -12,6 +12,7 @@ Feature: Wrap SM framework extension
     Then file "cookbooks/jenkins/recipes/default.rb" contains "require_recipe 'jenkins::install_sm_ext'"
     Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri('https://github.com/eystacks/sm_jenkins.git')"
     Then file "cookbooks/jenkins/recipes/install_sm_ext.rb" contains "command 'sm ext install jenkins #{node[:sm_jenkins_uri]}'"
+    Then file ".gitmodules" is not created
     And I should see exactly
       """
              exist  cookbooks
@@ -44,12 +45,7 @@ Feature: Wrap SM framework extension
 
   @wip
   Scenario: Wrap an SM extension and vendor it as submodule
-    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule repo" 
-    Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../repo', __FILE__))"
-    Then file ".gitmodules" contains
-      """
-      [submodule "cookbooks/sm_eyapi/repo"]
-      	path = cookbooks/sm_eyapi/repo
-      	url = git@github.com:eystacks/sm_eyapi.git
-      """
-    Then file "cookbooks/jenkins/repo/.git/config" contains "url = https://github.com/eystacks/sm_jenkins.git"
+    Given I am have a local git sm extension "local_sm_repo" at "/tmp/ey-recipes/local_sm_repo"
+    When I run local executable "ey-recipes" with arguments "sm /tmp/ey-recipes/local_sm_repo --name jenkins --submodule repo" 
+    Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../../../cookbooks/jenkins/repo', __FILE__))"
+    Then file "cookbooks/jenkins/repo/local_sm_repo_readme.md" is created

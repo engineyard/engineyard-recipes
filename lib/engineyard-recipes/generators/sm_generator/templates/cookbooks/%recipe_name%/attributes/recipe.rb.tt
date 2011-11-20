@@ -1,1 +1,6 @@
+<% if sm_vendor_path -%>
+<% # assumes render file is at 'cookbooks/recipe-name/attributes/recipe.rb' -%>
+sm_<%= recipe_name %>_uri(File.expand_path('../../../../<%= sm_vendor_path %>', __FILE__))
+<% else -%>
 sm_<%= recipe_name %>_uri('<%= sm_ext_uri %>')
+<% end %>

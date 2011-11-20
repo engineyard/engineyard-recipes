@@ -13,3 +13,17 @@ Given /^I am have a local recipe "([^\"]*)" at "\/tmp\/ey-recipes\/([^"]*)"$/ do
   FileUtils.mkdir_p(@tmp_recipes_path)
   FileUtils.cp_r(fixture_recipe, @tmp_recipes_path)
 end
+
+Given /^I am have a local git sm extension "([^"]*)" at "\/tmp\/ey-recipes\/([^"]*)"$/ do |name, repeat_name|
+  name.should == repeat_name
+  fixture_recipe = File.join(@fixtures_path, "sm_exts", name)
+  FileUtils.rm_rf(@tmp_recipes_path)
+  FileUtils.mkdir_p(@tmp_recipes_path)
+  FileUtils.cp_r(fixture_recipe, @tmp_recipes_path)
+  FileUtils.chdir(File.join(@tmp_recipes_path, name)) do
+    `git init`
+    `git add .`
+    `git commit -m 'Ready for testing'`
+  end
+end
+

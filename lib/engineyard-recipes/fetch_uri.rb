@@ -17,12 +17,15 @@ module Engineyard::Recipes
       end
     end
     
-    def submodule_recipe_into_recipe(uri, submodule_folder, recipe_name = nil)
-      if File.exists?(uri)
-        normalize_fetched_project(uri, source_root, recipe_name)
-      else
-        raise UnknownPath, uri
-      end
+    # Vendor/submodule the +uri+ into current git repo at +sm_vendor_path+
+    # If +uri+ is a local folder, then copy folder to +sm_vendor_path+
+    # If +uri+ is a remote git repo, then submodule to +sm_vendor_path+
+    def vendor_recipe_into_recipe(uri, sm_vendor_path)
+      # TODO - TDD this
+      
+      # flags = ""
+      # flags += " --local" if File.exists?(uri)
+      # `git submodule add #{flags} #{uri} #{sm_vendor_path}`
     end
     
     # Takes a folder that is either a cookbooks/<recipes> structure, or
