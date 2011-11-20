@@ -1,3 +1,5 @@
+require "engineyard-recipes/git_cmd"
+
 module Engineyard::Recipes
   module FetchUri
     extend self

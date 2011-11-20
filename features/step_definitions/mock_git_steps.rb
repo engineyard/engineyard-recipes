@@ -1,5 +1,3 @@
-require "engineyard-recipes/git_cmd"
-
 Given /^I mock out git commands$/ do
   Engineyard::Recipes::GitCmd.test_mode = true
 end
