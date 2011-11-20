@@ -6,6 +6,7 @@ module Engineyard::Recipes
     extend Engineyard::Recipes::GitCmd
     
     class UnknownPath < StandardError; end
+    class TargetPathNotGitRepository < StandardError; end
     
     # Fetch the target at URI (git url or local folder path)
     #
@@ -26,8 +27,12 @@ module Engineyard::Recipes
     def vendor_recipe_into_recipe(uri, sm_vendor_path)
       if File.exists?(uri)
         FileUtils.cp_r(uri, sm_vendor_path)
-      else 
-        git "submodule add #{uri} #{sm_vendor_path}"
+      else
+        if File.directory?(".git")
+          git "submodule add #{uri} #{sm_vendor_path}"
+        else
+          raise TargetPathNotGitRepository
+        end
       end
     end
     

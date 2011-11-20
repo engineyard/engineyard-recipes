@@ -27,3 +27,10 @@ Given /^I am have a local sm extension "([^"]*)" at "\/tmp\/ey-recipes\/([^"]*)"
   end
 end
 
+Given /^project is a git repository$/ do
+  in_project_folder do
+    `git init`
+    `git add .`
+    `git commit -m 'Ready for testing'`
+  end
+end

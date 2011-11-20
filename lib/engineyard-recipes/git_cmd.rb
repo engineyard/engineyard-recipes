@@ -9,6 +9,7 @@ module Engineyard::Recipes
         git_mock_log = File.expand_path("../../../tmp/git.log", __FILE__)
         File.open(git_mock_log, "a") { |file| file << command; file << "\n" }
       else
+        puts "git #{command}"
         `git #{command}`
       end
     end
