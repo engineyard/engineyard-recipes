@@ -4,5 +4,5 @@
 #
 
 execute "sm ext install <%= recipe_name %> #{node[:sm_<%= recipe_name %>_uri]}" do
-  command 'sm ext install <%= recipe_name %> #{node[:sm_<%= recipe_name %>_uri]}'
+  command %(sm ext install <%= recipe_name %> #{node[:sm_<%= recipe_name %>_uri]})
 end

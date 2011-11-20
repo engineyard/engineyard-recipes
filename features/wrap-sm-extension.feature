@@ -11,7 +11,7 @@ Feature: Wrap SM framework extension
     When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins" 
     Then file "cookbooks/jenkins/recipes/default.rb" contains "require_recipe 'jenkins::install_sm_ext'"
     Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri('https://github.com/eystacks/sm_jenkins.git')"
-    Then file "cookbooks/jenkins/recipes/install_sm_ext.rb" contains "command 'sm ext install jenkins #{node[:sm_jenkins_uri]}'"
+    Then file "cookbooks/jenkins/recipes/install_sm_ext.rb" contains "command %(sm ext install jenkins #{node[:sm_jenkins_uri]})"
     Then file ".gitmodules" is not created
     And I should see exactly
       """
@@ -28,9 +28,9 @@ Feature: Wrap SM framework extension
     Then file "cookbooks/jenkins/recipes/default.rb" contains "require_recipe 'jenkins::install'"
     Then file "cookbooks/jenkins/recipes/default.rb" contains "require_recipe 'jenkins::configure'"
     Then file "cookbooks/jenkins/recipes/default.rb" contains "require_recipe 'jenkins::start'"
-    Then file "cookbooks/jenkins/recipes/install.rb" contains "command 'sm jenkins install'"
-    Then file "cookbooks/jenkins/recipes/configure.rb" contains "command 'sm jenkins configure'"
-    Then file "cookbooks/jenkins/recipes/start.rb" contains "command 'sm jenkins start'"
+    Then file "cookbooks/jenkins/recipes/install.rb" contains "command %(sm jenkins install)"
+    Then file "cookbooks/jenkins/recipes/configure.rb" contains "command %(sm jenkins configure)"
+    Then file "cookbooks/jenkins/recipes/start.rb" contains "command %(sm jenkins start)"
     And I should see exactly
       """
              exist  cookbooks

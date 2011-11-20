@@ -4,6 +4,6 @@
 #
 
 execute "sm <%= recipe_name %> <%= command %>" do
-  command 'sm <%= recipe_name %> <%= command %>'
+  command %(sm <%= recipe_name %> <%= command %>)
   user 'root'
 end
