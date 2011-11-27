@@ -8,6 +8,8 @@ Feature: Setup your EY Cloud cookbook to use SM framework extensions
     When I run local executable "ey-recipes" with arguments "init-sm"
     Then file "cookbooks/sm/recipes/default.rb" contains "require_recipe 'sm::install'"
     Then file "cookbooks/sm/recipes/install.rb" contains "curl -L -s https://github.com/sm/sm/tarball/master -o sm-master.tar.gz"
+    # Then file "cookbooks/main/recipes/default.rb" contains "require_recipe 'eyapi'"
+    Then file "cookbooks/main/recipes/default.rb" contains "require_recipe 'sm'"
     And I should see exactly
       """
              exist  cookbooks
@@ -16,6 +18,9 @@ Feature: Setup your EY Cloud cookbook to use SM framework extensions
             create  cookbooks/sm/recipes/install.rb
             append  cookbooks/main/recipes/default.rb
       """
+      # create  cookbooks/eyapi/attributes/recipe.rb
+      # create  cookbooks/eyapi/recipes/default.rb
+      # create  cookbooks/eyapi/recipes/install.rb
 
   Scenario: Create new EY CLoud custom cookbooks with SM extensions
     Given I am in the "rails" project folder
@@ -34,3 +39,6 @@ Feature: Setup your EY Cloud cookbook to use SM framework extensions
             create  cookbooks/sm/recipes/install.rb
             append  cookbooks/main/recipes/default.rb
       """
+      # create  cookbooks/eyapi/attributes/recipe.rb
+      # create  cookbooks/eyapi/recipes/default.rb
+      # create  cookbooks/eyapi/recipes/install.rb
