@@ -1,0 +1,16 @@
+#
+# Cookbook Name:: <%= recipe_name %>
+# Recipe:: default
+#
+
+# Note that this is for the <%= timezone %> timezone. Look in
+# /usr/share/zoneinfo for your relevant file.
+service "vixie-cron"
+service "sysklogd"
+service "nginx"
+
+link "/etc/localtime" do
+  to "/usr/share/zoneinfo/<%= timezone %>"
+  notifies :restart, resources(:service => ["vixie-cron", "sysklogd", "nginx"]), :delayed
+  not_if "readlink /etc/localtime | grep -q '<%= timezone %>$'"
+end

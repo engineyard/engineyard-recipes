@@ -9,6 +9,13 @@ Feature: Timezone override
     When I run local executable "ey-recipes" with arguments "timezone Australia/Tasmania"
     Then file "cookbooks/timezone-override/recipes/default.rb" contains
       """
+      #
+      # Cookbook Name:: timezone-override
+      # Recipe:: default
+      #
+
+      # Note that this is for the Australia/Tasmania timezone. Look in
+      # /usr/share/zoneinfo for your relevant file.
       service "vixie-cron"
       service "sysklogd"
       service "nginx"

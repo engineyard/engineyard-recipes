@@ -39,6 +39,12 @@ module Engineyard
         Engineyard::Recipes::Generators::DefinitionGenerator.start([recipe_name, definition_name])
       end
       
+      desc "timezone TIMEZONE", "Generate recipe to set the timezone"
+      def timezone(timezone)
+        require 'engineyard-recipes/generators/timezone_generator'
+        Engineyard::Recipes::Generators::TimezoneGenerator.start([timezone])
+      end
+      
       desc "clone URI", "Clone a recipe into cookbook. URI can be git or local path."
       method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name."
       def clone(folder_path) # TODO support git URIs
