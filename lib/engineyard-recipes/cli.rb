@@ -39,6 +39,12 @@ module Engineyard
         Engineyard::Recipes::Generators::DefinitionGenerator.start([recipe_name, definition_name])
       end
       
+      desc "command NAME COMMAND", "Run a command and ensure it stays running with monit"
+      def command(command_name, command_to_run)
+        require 'engineyard-recipes/generators/command_runner_generator'
+        Engineyard::Recipes::Generators::CommandRunnerGenerator.start([command_name, command_to_run])
+      end
+      
       desc "timezone TIMEZONE", "Generate recipe to set the timezone"
       def timezone(timezone)
         require 'engineyard-recipes/generators/timezone_generator'

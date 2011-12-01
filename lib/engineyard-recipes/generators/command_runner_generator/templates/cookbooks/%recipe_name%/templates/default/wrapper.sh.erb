@@ -1,0 +1,77 @@
+#!/bin/bash
+#
+# This script starts and stops a command in a way that monit can
+# monitor it.
+# Run the script as follows:
+# /usr/local/bin/<%= "#{@app_name}_#{@command_name}_wrapper" %> app_name start|stop
+#
+
+# These variables are managed by Chef - modify them in recipes/default.rb
+COMMAND_NAME="<%= @command_name %>" # Alpha-numeric characters and underscores only
+COMMAND="<%= @command_to_run %>"
+
+CURDIR=`pwd`
+PATH=/bin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:$PATH
+
+RAILS_ROOT=/data/$1/current
+
+PID_FILE=/var/run/engineyard/$COMMAND_NAME/$1/$COMMAND_NAME.pid
+EXEC_LOG_FILE=/var/log/engineyard/$COMMAND_NAME/wrapper_$1.log
+
+usage() {
+  echo "Usage: $0 <appname> {start|stop}"
+  exit 1
+}
+
+if [ $# -lt 2 ]; then usage; fi
+
+if [ -d $RAILS_ROOT ]; then
+  mkdir -p /var/log/engineyard/$COMMAND_NAME/$1
+  mkdir -p /var/run/engineyard/$COMMAND_NAME/$1
+  
+  # handle the second param, don't start if already existing
+  case "$2" in
+    start)
+      cd $RAILS_ROOT
+      echo "Starting $COMMAND_NAME"
+      if [ -f $PID_FILE ]; then
+        PID=`cat $PID_FILE`
+        if [ -d /proc/$PID ]; then
+          echo "$COMMAND_NAME is already running."
+          exit 1
+        fi
+        rm -f $PID_FILE
+      fi
+      exec $COMMAND 1>$EXEC_LOG_FILE 2>&1 <%= "&" if @run_in_background %> 
+      <%= @run_in_background ? "echo $! > $PID_FILE;" : "echo $$ > $PID_FILE" %>
+      ;;
+    stop)
+      GRACE_TIME=${GRACE_TIME:-40}
+      echo "Stopping $COMMAND_NAME"
+      if [ -f $PID_FILE ]; then
+        PID=`cat $PID_FILE`
+        kill $PID 2>/dev/null; true
+        SLEEP_COUNT=0
+        while [ -e /proc/$PID ]; do
+          sleep .25
+          let "SLEEP_COUNT+=1"
+          if(( "$SLEEP_COUNT" > $GRACE_TIME )); then
+            echo "Stop wait time exceeded. Killing..."
+            kill -9 $PID 2>/dev/null; true
+            break
+          fi
+        done
+        rm $PID_FILE
+      else
+        echo "No PID file found! Cannot stop $COMMAND_NAME"
+      fi
+      ;;
+    *)
+      usage
+      ;;
+        esac
+else
+  echo "$RAILS_ROOT doesn't exist."
+  usage
+fi
+cd $CURDIR

@@ -1,0 +1,7 @@
+check process <%= "#{@app_name}_#{@command_name}" %>
+  with pidfile /var/run/engineyard/<%= @command_name %>/<%= @app_name %>/<%=@command_name %>.pid
+  start program = "/usr/local/bin/<%= "#{@app_name}_#{@command_name}" %>_wrapper <%= @app_name %> start"
+  stop program = "/usr/local/bin/<%= "#{@app_name}_#{@command_name}" %>_wrapper <%= @app_name %> stop"
+  # if mem > 200 MB for 2 cycles then restart
+  # if cpu > 100% for 2 cycles then restart
+  group <%= "#{@app_name}_#{@command_name}" %>
