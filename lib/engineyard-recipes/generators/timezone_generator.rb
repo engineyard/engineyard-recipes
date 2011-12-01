@@ -4,11 +4,16 @@ module Engineyard::Recipes
   module Generators
     class TimezoneGenerator < Thor::Group
       include Thor::Actions
+      class InvalidTimezone < StandardError; end
       
       argument :timezone
 
       def self.source_root
         File.join(File.dirname(__FILE__), "timezone_generator", "templates")
+      end
+      
+      def check_timezone
+        raise InvalidTimezone.new(timezone) unless timezones =~ /^#{timezone}$/
       end
       
       def install_cookbooks
@@ -29,6 +34,10 @@ module Engineyard::Recipes
       protected
       def recipe_name
         'timezone-override'
+      end
+      
+      def timezones
+        timezones ||= File.read(File.expand_path("../../zonefiles", __FILE__))
       end
     end
   end

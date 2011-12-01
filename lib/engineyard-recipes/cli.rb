@@ -43,6 +43,8 @@ module Engineyard
       def timezone(timezone)
         require 'engineyard-recipes/generators/timezone_generator'
         Engineyard::Recipes::Generators::TimezoneGenerator.start([timezone])
+      rescue Engineyard::Recipes::Generators::TimezoneGenerator::InvalidTimezone => e
+        error "#{e.message} is not a known timezone."
       end
       
       desc "clone URI", "Clone a recipe into cookbook. URI can be git or local path."

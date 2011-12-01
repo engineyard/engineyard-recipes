@@ -34,3 +34,11 @@ Feature: Timezone override
             append  cookbooks/main/recipes/default.rb
       """
   
+  Scenario: Cannot set an invalid timezone
+    When I run local executable "ey-recipes" with arguments "timezone XXXX"
+    And file "cookbooks/main/recipes/default.rb" does not contain "require_recipe 'timezone-override'"
+    And I should see exactly
+      """
+      ERROR: XXXX is not a known timezone.
+      """
+  

@@ -25,3 +25,13 @@ desc 'Alias for cucumber:ok'
 task :cucumber => 'cucumber:ok'
 
 task :default => ["spec", "cucumber"]
+
+desc "Generate list of zoneinfo"
+task :zoneinfo do
+  zonefile = File.expand_path("../lib/engineyard-recipes/zonefiles", __FILE__)
+  FileUtils.chdir("/usr/share/zoneinfo") do
+    File.open(zonefile, "w") do |file|
+      file << Dir['**/*'].join("\n")
+    end
+  end
+end
