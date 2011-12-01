@@ -1,6 +1,14 @@
 # ChangeLog
 
-## v0.1.0
+## v0.2
+
+Timezones & SM Extensions
+
+* `timezone` - set the required timezone for instances
+* `sm` - use SM extensions (wrapped in chef recipes)
+* `init --sm` & `init-sm` - setup to use SM extensions (required for `sm`)
+
+## v0.1
 
 Initial set of commands:
 
