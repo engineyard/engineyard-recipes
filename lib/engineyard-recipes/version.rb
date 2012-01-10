@@ -1,5 +1,5 @@
 module Engineyard
   module Recipes
-    VERSION = "0.2.0"
+    VERSION = "0.3.0.pre"
   end
 end
