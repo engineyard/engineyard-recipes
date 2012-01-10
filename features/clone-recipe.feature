@@ -45,7 +45,19 @@ Feature: Clone recipe from git repositories
             create  cookbooks/library/README.rdoc
             create  cookbooks/library/libraries/mylib.rb
       """
-  
+
+  Scenario: Clone a single recipe from a local folder into local folder instead of in cookbooks/
+    Given I am have a local recipe "blank" at "/tmp/ey-recipes/blank"
+    When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/blank --local"
+    Then file "blank/README.rdoc" is created
+    And file "blank/README.rdoc" contains "This is a local recipe"
+    And I should see exactly
+      """
+             exist  
+            create  blank/README.rdoc
+            create  blank/recipes/default.rb
+      """
+
   Scenario: Clone URI is an unknown local path
     When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/UNKNOWN"
     And I should see exactly

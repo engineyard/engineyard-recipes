@@ -20,7 +20,7 @@ module Engineyard::Recipes
       end
       
       def auto_require_package
-        if target_root == "cookbooks" # if generating into a cookbooks folder
+        if cookbooks?
           file = "cookbooks/main/recipes/default.rb"
           file_path = File.join(destination_root, "cookbooks/main/recipes/default.rb")
           unless File.exists?(file_path)
@@ -39,6 +39,10 @@ module Engineyard::Recipes
       
       def known_package?
         package =~ /UNKNOWN/
+      end
+      
+      def cookbooks?
+        target_root == "cookbooks"
       end
     end
   end

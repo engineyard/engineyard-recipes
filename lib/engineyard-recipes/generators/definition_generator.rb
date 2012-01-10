@@ -6,6 +6,7 @@ module Engineyard::Recipes
       include Thor::Actions
       
       argument :recipe_name
+      argument :target_root
       argument :definition_name
 
       def self.source_root
@@ -13,7 +14,7 @@ module Engineyard::Recipes
       end
       
       def install_cookbooks
-        directory "cookbooks"
+        directory "cookbooks", target_root # either "cookbooks" or "."
       end
       
       private

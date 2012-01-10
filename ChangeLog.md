@@ -1,5 +1,7 @@
 # ChangeLog
 
+* `--local` (clone, recipes, definitions) - generates into local path instead of cookbooks/ subfolder; useful for developing dedicated recipe repositories instead of an entire cookbook; ignores cookbooks/main/recipes/default.rb
+
 ## v0.2
 
 Timezones & SM Extensions

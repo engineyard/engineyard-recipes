@@ -25,5 +25,13 @@ Feature: Generate helper definitions recipe
             create  cookbooks/mylibrary/definitions/helper2.rb
       """
   
-  
-  
+  Scenario: Generate a new recipe into local folder instead of in cookbooks/
+    When I run local executable "ey-recipes" with arguments "definition mylibrary helper1 --local"
+    And file "mylibrary/definitions/helper1.rb" is created
+    And file "mylibrary/definitions/helper1.rb" contains "define :helper1 do"
+    And I should see exactly
+      """
+             exist  
+            create  mylibrary/definitions/helper1.rb
+      """
+

@@ -36,9 +36,12 @@ module Engineyard
       end
       
       desc "definition RECIPE DEFINITION", "Generate recipe for a package"
+      method_option :local, :aliases => ['-l'], :type => :boolean, :desc => "Generate into local folder, instead of cookbooks/RECIPE_NAME"
       def definition(recipe_name, definition_name)
+        target_root = options["local"] ? "." : "cookbooks"
+
         require 'engineyard-recipes/generators/definition_generator'
-        Engineyard::Recipes::Generators::DefinitionGenerator.start([recipe_name, definition_name])
+        Engineyard::Recipes::Generators::DefinitionGenerator.start([recipe_name, target_root, definition_name])
       end
       
       desc "timezone TIMEZONE", "Generate recipe to set the timezone"
@@ -51,11 +54,14 @@ module Engineyard
       
       desc "clone URI", "Clone a recipe into cookbook. URI can be git or local path."
       method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name."
+      method_option :local, :aliases => ['-l'], :type => :boolean, :desc => "Generate into local folder, instead of cookbooks/RECIPE_NAME"
       def clone(folder_path) # TODO support git URIs
+        target_root = options["local"] ? "." : "cookbooks"
+
         require 'engineyard-recipes/generators/local_recipe_clone_generator'
         generator = Engineyard::Recipes::Generators::LocalRecipeCloneGenerator
         local_cookbook_path, recipe_name = FetchUri.fetch_recipe(folder_path, generator.source_root, options["name"])
-        generator.start([recipe_name])
+        generator.start([recipe_name, target_root])
       rescue Engineyard::Recipes::FetchUri::UnknownPath => e
         error "No recipe found at #{e.message}"
       end
