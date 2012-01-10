@@ -1,4 +1,4 @@
-Feature: Generate package recipe
+Feature: Generate package recipe into cookbook
   I want to generate a new chef recipe for a package
   And it is automatically included in the main recipe/run
   
