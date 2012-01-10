@@ -24,13 +24,15 @@ module Engineyard
       method_option :package, :aliases => ['-p'], :desc => "Gentoo package name, e.g. dev-util/gitosis-gentoo"
       method_option :version, :aliases => ['-v'], :desc => "Gentoo package version, e.g. 0.2_p20081028"
       method_options %w( unmasked -u ) => :boolean, :desc => "Unmask the required gentoo package"
+      method_option :local, :aliases => ['-l'], :type => :boolean, :desc => "Generate into local folder, instead of cookbooks/RECIPE_NAME"
       def recipe(recipe_name)
-        package       = options["package"] || "UNKNOWN/#{recipe_name}"
-        version       = options["version"] || '1.0.0'
-        unmasked      = options["unmasked"] || false
+        target_root = options["local"] ? "." : "cookbooks"
+        package     = options["package"] || "UNKNOWN/#{recipe_name}"
+        version     = options["version"] || '1.0.0'
+        unmasked    = options["unmasked"] || false
 
         require 'engineyard-recipes/generators/recipe_generator'
-        Engineyard::Recipes::Generators::RecipeGenerator.start([recipe_name, package, version, unmasked])
+        Engineyard::Recipes::Generators::RecipeGenerator.start([recipe_name, target_root, package, version, unmasked])
       end
       
       desc "definition RECIPE DEFINITION", "Generate recipe for a package"
