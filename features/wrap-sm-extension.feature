@@ -46,16 +46,16 @@ Feature: Wrap SM framework extension
   Scenario: Wrap a local SM extension and vendor it
     Given project is a git repository
     And I am have a local sm extension "local_sm_repo" at "/tmp/ey-recipes/local_sm_repo"
-    When I run local executable "ey-recipes" with arguments "sm /tmp/ey-recipes/local_sm_repo --name jenkins --submodule repo" 
-    Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../../../cookbooks/jenkins/repo', __FILE__))"
+    When I run local executable "ey-recipes" with arguments "sm /tmp/ey-recipes/local_sm_repo --name jenkins --submodule" 
+    Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../repo', __FILE__))"
     And git command "git submodule add https://github.com/eystacks/sm_jenkins.git cookbooks/jenkins/repo" is not run
     And file "cookbooks/jenkins/repo/local_sm_repo_readme.md" is created
 
   Scenario: Wrap a git SM extension and vendor it via submodules
     Given project is a git repository
     And I mock out git commands
-    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule repo" 
-    Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../../../cookbooks/jenkins/repo', __FILE__))"
+    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule" 
+    Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../repo', __FILE__))"
     And git command "git submodule add https://github.com/eystacks/sm_jenkins.git cookbooks/jenkins/repo" is run
     
   Scenario: Wrap a git SM extension and vendor it via submodules for chef-on-deploy
@@ -63,13 +63,13 @@ Feature: Wrap SM framework extension
     When I run local executable "ey-recipes" with arguments "init-sm"
     Given project is a git repository
     And I mock out git commands
-    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule repo" 
+    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule" 
     Then file "deploy/cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../repo', __FILE__))"
     And git command "git submodule add https://github.com/eystacks/sm_jenkins.git deploy/cookbooks/jenkins/repo" is run
 
   Scenario: Do not allow submodules flag if current project is not a git repo
     Given I mock out git commands
-    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule repo" 
+    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule" 
     Then I should see exactly
       """
       ERROR: This project is not a git repository yet.
