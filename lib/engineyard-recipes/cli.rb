@@ -30,13 +30,13 @@ module Engineyard
       method_options %w( unmasked -u ) => :boolean, :desc => "Unmask the required gentoo package"
       method_option :local, :aliases => ['-l'], :type => :boolean, :desc => "Generate into local folder, instead of cookbooks/RECIPE_NAME"
       def recipe(recipe_name)
-        target_root = options["local"] ? "." : "cookbooks"
-        package     = options["package"] || "UNKNOWN/#{recipe_name}"
-        version     = options["version"] || '1.0.0'
-        unmasked    = options["unmasked"] || false
+        package  = options["package"] || "UNKNOWN/#{recipe_name}"
+        version  = options["version"] || '1.0.0'
+        unmasked = options["unmasked"] || false
+        local    = options["local"] || false
 
         require 'engineyard-recipes/generators/recipe_generator'
-        Engineyard::Recipes::Generators::RecipeGenerator.start([recipe_name, target_root, package, version, unmasked])
+        Engineyard::Recipes::Generators::RecipeGenerator.start([recipe_name, package, version, unmasked, local])
       end
       
       desc "definition RECIPE DEFINITION", "Generate recipe for a package"

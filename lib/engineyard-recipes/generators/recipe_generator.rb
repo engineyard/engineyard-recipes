@@ -2,34 +2,27 @@ require 'thor/group'
 
 module Engineyard::Recipes
   module Generators
-    class RecipeGenerator < Thor::Group
+    class RecipeGenerator < BaseGenerator
       include Thor::Actions
       
       argument :recipe_name
-      argument :target_root
       argument :package
       argument :version
       argument :unmasked, :optional => true
+      argument :local, :optional => true
 
       def self.source_root
         File.join(File.dirname(__FILE__), "recipe_generator", "templates")
       end
       
-      def install_cookbooks
-        directory "cookbooks", target_root # either "cookbooks" or "."
+      def auto_require_package
+        file = cookbooks_dir "main/recipes/default.rb"
+        require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
+        append_to_file file, require_recipe
       end
       
-      def auto_require_package
-        if cookbooks?
-          file = "cookbooks/main/recipes/default.rb"
-          file_path = File.join(destination_root, "cookbooks/main/recipes/default.rb")
-          unless File.exists?(file_path)
-            puts "Skipping auto-require of package recipe: #{file} is missing"
-          else
-            require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
-            append_to_file file, require_recipe
-          end
-        end
+      def install_cookbooks
+        directory "cookbooks", cookbooks_destination
       end
       
       private
@@ -39,10 +32,6 @@ module Engineyard::Recipes
       
       def known_package?
         package =~ /UNKNOWN/
-      end
-      
-      def cookbooks?
-        target_root == "cookbooks"
       end
     end
   end
