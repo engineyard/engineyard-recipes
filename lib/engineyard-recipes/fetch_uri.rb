@@ -25,10 +25,12 @@ module Engineyard::Recipes
     # If +uri+ is a local folder, then copy folder to +recipe_vendor_path+
     # If +uri+ is a remote git repo, then clone/copy to +recipe_vendor_path+
     def vendor_recipe_into_recipe(uri, recipe_vendor_path)
+      FileUtils.rm_rf(recipe_vendor_path)
       if File.exists?(uri)
         FileUtils.cp_r(uri, recipe_vendor_path)
       else
         git "clone #{uri} #{recipe_vendor_path}"
+        FileUtils.rm_rf(File.join(recipe_vendor_path, ".git"))
       end
     end
     
