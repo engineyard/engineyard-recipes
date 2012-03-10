@@ -75,15 +75,11 @@ module Engineyard
       
       desc "sm URI [COMMANDS]", "Wrap an SM extension as an eychef recipe"
       method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name.", :required => true
-      method_option :submodule, :type => :boolean, :aliases => ['--vendor', '-s'], :desc => "Submodule the URI into recipe folder"
       def sm(uri, *commands)
         require 'engineyard-recipes/generators/sm_generator'
         recipe_name = options["name"]
-        submodule = options["submodule"] || false
         
-        error "This project is not a git repository yet." if submodule && !File.directory?(".git")
-
-        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri, commands, { :submodule => submodule }])
+        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri, commands])
       end
       
       desc "version", "show version information"

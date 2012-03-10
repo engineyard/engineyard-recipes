@@ -14,7 +14,7 @@ Patches:
 ### v0.3.2
 
 * Fix `init-sm` to generate into `deploy/cookbooks` if its present
-* Fix `sm --submodule` to generate into `deploy/cookbooks/<recipe>/repo` if its present
+* Removed `sm --submodule` - `sm` always vendors/clones/copies the target folder/URI to `/repo` folder
 
 ## v0.2
 

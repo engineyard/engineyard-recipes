@@ -12,9 +12,9 @@ describe Engineyard::Recipes::FetchUri do
   end
 
 
-  # Vendor/submodule the +uri+ into current git repo at +sm_vendor_path+
-  # If +uri+ is a local folder, then copy folder to +sm_vendor_path+
-  # If +uri+ is a remote git repo, then submodule to +sm_vendor_path+
+  # Vendor/submodule the +uri+ into current git repo at +recipe_vendor_path+
+  # If +uri+ is a local folder, then copy folder to +recipe_vendor_path+
+  # If +uri+ is a remote git repo, then submodule to +recipe_vendor_path+
   describe "#vendor_recipe_into_recipe" do
   end
   
