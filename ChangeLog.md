@@ -3,6 +3,7 @@
 ## v0.3.pre
 
 * `--local` (clone, recipes, definitions) - generates into local path instead of cookbooks/ subfolder; useful for developing dedicated recipe repositories instead of an entire cookbook; ignores cookbooks/main/recipes/default.rb
+* `init -d` - enables "run chef during deploy". Cookbooks generated into `deploy/cookbooks/` instead of `cookbooks/`
 
 ## v0.2
 
