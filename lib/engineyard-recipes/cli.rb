@@ -7,10 +7,13 @@ module Engineyard
     class CLI < Thor
 
       desc "init", "Creates cookbooks scaffolding for your recipes"
+      method_option :"on-deploy", :aliases => ['-d'], :type => :boolean, :desc => "Run recipes during deployment"
       method_option :sm, :type => :boolean, :desc => "Also install SM framework support"
       def init
+        on_deploy = options["on-deploy"] || false
+        
         require 'engineyard-recipes/generators/init_generator'
-        Engineyard::Recipes::Generators::InitGenerator.start
+        Engineyard::Recipes::Generators::InitGenerator.start([on_deploy])
         init_sm if options[:sm]
       end
       

@@ -4,6 +4,8 @@ module Engineyard::Recipes
   module Generators
     class InitGenerator < Thor::Group
       include Thor::Actions
+
+      argument :on_deploy, :optional => true
       
       def self.source_root
         File.join(File.dirname(__FILE__), "init_generator", "templates")
@@ -13,6 +15,9 @@ module Engineyard::Recipes
         file       = "cookbooks/main/recipes/default.rb"
         unless File.exists?(File.join(destination_root, "cookbooks/main/recipes/default.rb"))
           directory "cookbooks"
+        end
+        if on_deploy
+          directory "deploy"
         end
       end
       

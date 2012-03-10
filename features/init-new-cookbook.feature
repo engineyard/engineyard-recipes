@@ -14,3 +14,8 @@ Feature: Generate a new custom cookbook for your EY Cloud environments
             create  cookbooks/main/libraries/run_for_app.rb
             create  cookbooks/main/recipes/default.rb
       """
+
+  Scenario: Run cookbooks during deployments
+    Given I am in the "rails" project folder
+    When I run local executable "ey-recipes" with arguments "init -d"
+    And file "deploy/before_migrate.rb" is created
