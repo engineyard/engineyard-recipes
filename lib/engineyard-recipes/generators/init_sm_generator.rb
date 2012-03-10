@@ -2,7 +2,7 @@ require 'thor/group'
 
 module Engineyard::Recipes
   module Generators
-    class InitSmGenerator < Thor::Group
+    class InitSmGenerator < BaseGenerator
       include Thor::Actions
       
       def self.source_root
@@ -14,21 +14,12 @@ module Engineyard::Recipes
       end
       
       def auto_require_package
-        file = "cookbooks/main/recipes/default.rb"
-        file_path = File.join(destination_root, "cookbooks/main/recipes/default.rb")
-        unless File.exists?(file_path)
-          puts "Skipping auto-require of package recipe: #{file} is missing"
-        else
-          require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
-          append_to_file file, require_recipe
-        end
+        file      = cookbooks_dir("main/recipes/default.rb")
+        require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
+        append_to_file file, require_recipe
       end
       
-      private
-      def say(msg, color = nil)
-        color ? shell.say(msg, color) : shell.say(msg)
-      end
-      
+      private      
       def recipe_name
         'sm'
       end

@@ -1,8 +1,9 @@
 require 'thor/group'
+require 'engineyard-recipes/generators/base_generator'
 
 module Engineyard::Recipes
   module Generators
-    class InitGenerator < Thor::Group
+    class InitGenerator < BaseGenerator
       include Thor::Actions
 
       argument :on_deploy, :optional => true
@@ -20,17 +21,13 @@ module Engineyard::Recipes
         end
       end
       
-      private
+      protected
       def cookbooks_destination
         if on_deploy
           "deploy/cookbooks"
         else
           "cookbooks"
         end
-      end
-      
-      def say(msg, color = nil)
-        color ? shell.say(msg, color) : shell.say(msg)
       end
     end
   end
