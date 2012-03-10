@@ -14,7 +14,7 @@ module Engineyard::Recipes
       end
       
       def auto_require_package
-        file      = cookbooks_dir("main/recipes/default.rb")
+        file           = cookbooks_dir("main/recipes/default.rb")
         require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
         append_to_file file, require_recipe
       end

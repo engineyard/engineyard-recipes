@@ -1,5 +1,4 @@
 require 'thor/group'
-require 'engineyard-recipes/generators/base_generator'
 
 module Engineyard::Recipes
   module Generators

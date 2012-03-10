@@ -46,6 +46,7 @@ Feature: Clone recipe from git repositories
             create  cookbooks/library/libraries/mylib.rb
       """
 
+  @wip
   Scenario: Clone a single recipe from a local folder into local folder instead of in cookbooks/
     Given I am have a local recipe "blank" at "/tmp/ey-recipes/blank"
     When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/blank --local"
