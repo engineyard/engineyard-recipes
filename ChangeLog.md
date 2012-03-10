@@ -11,6 +11,10 @@ Patches:
 
 * Fixed ruby 1.8 bug - Dir.exist? => File.directory?
 
+### v0.3.2
+
+* Fix `init-sm` to generate into `deploy/cookbooks` if its present
+
 ## v0.2
 
 Timezones & SM Extensions
