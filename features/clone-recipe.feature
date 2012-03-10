@@ -14,10 +14,10 @@ Feature: Clone recipe from git repositories
     And file "cookbooks/main/recipes/default.rb" contains "require_recipe 'blank'"
     And I should see exactly
       """
-            append  cookbooks/main/recipes/default.rb
              exist  cookbooks
             create  cookbooks/blank/README.rdoc
             create  cookbooks/blank/recipes/default.rb
+            append  cookbooks/main/recipes/default.rb
       """
 
   Scenario: Clone a single recipe from local folder with alternate recipe name
@@ -28,10 +28,10 @@ Feature: Clone recipe from git repositories
     And file "cookbooks/main/recipes/default.rb" contains "require_recipe 'myrecipe'"
     And I should see exactly
       """
-            append  cookbooks/main/recipes/default.rb
              exist  cookbooks
             create  cookbooks/myrecipe/README.rdoc
             create  cookbooks/myrecipe/recipes/default.rb
+            append  cookbooks/main/recipes/default.rb
       """
 
   Scenario: Clone recipe repo, do not auto-require if no recipe

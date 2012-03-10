@@ -15,14 +15,14 @@ module Engineyard::Recipes
         File.join(File.dirname(__FILE__), "recipe_generator", "templates")
       end
       
+      def install_cookbooks
+        directory "cookbooks", cookbooks_destination
+      end
+      
       def auto_require_package
         file = cookbooks_dir "main/recipes/default.rb"
         require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
         append_to_file file, require_recipe
-      end
-      
-      def install_cookbooks
-        directory "cookbooks", cookbooks_destination
       end
       
       private

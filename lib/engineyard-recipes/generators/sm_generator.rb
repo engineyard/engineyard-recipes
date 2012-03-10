@@ -2,7 +2,7 @@ require 'thor/group'
 
 module Engineyard::Recipes
   module Generators
-    class SmGenerator < Thor::Group
+    class SmGenerator < BaseGenerator
       include Thor::Actions
       attr_accessor :command
       
@@ -16,27 +16,22 @@ module Engineyard::Recipes
       end
       
       def install_cookbooks
-        directory "cookbooks"
+        directory "cookbooks", cookbooks_destination
       end
       
       def wrap_commands
         template_file = 'command_recipe.rb.tt'
         sm_ext_commands.each do |command|
           self.command = command # for the template
-          recipe = "cookbooks/#{recipe_name}/recipes/#{command}.rb"
+          recipe = cookbooks_dir "#{recipe_name}/recipes/#{command}.rb"
           template(template_file, recipe)
         end
       end
       
       def auto_require_package
-        file = "cookbooks/main/recipes/default.rb"
-        file_path = File.join(destination_root, "cookbooks/main/recipes/default.rb")
-        unless File.exists?(file_path)
-          puts "Skipping auto-require of package recipe: #{file} is missing"
-        else
-          require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
-          append_to_file file, require_recipe
-        end
+        file = cookbooks_dir "main/recipes/default.rb"
+        require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
+        append_to_file file, require_recipe
       end
       
       private

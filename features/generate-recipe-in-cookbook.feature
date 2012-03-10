@@ -16,11 +16,11 @@ Feature: Generate package recipe into cookbook
     And file "cookbooks/main/recipes/default.rb" contains "require_recipe 'new-component'"
     And I should see exactly
       """
-            append  cookbooks/main/recipes/default.rb
              exist  cookbooks
             create  cookbooks/new-component/attributes/recipe.rb
             create  cookbooks/new-component/recipes/default.rb
             create  cookbooks/new-component/recipes/install.rb
+            append  cookbooks/main/recipes/default.rb
       """
   
   Scenario: Generate a recipe that already exists
@@ -28,11 +28,11 @@ Feature: Generate package recipe into cookbook
     When I run local executable "ey-recipes" with arguments "recipe new-component"
     And I should see exactly
       """
-            append  cookbooks/main/recipes/default.rb
              exist  cookbooks
          identical  cookbooks/new-component/attributes/recipe.rb
          identical  cookbooks/new-component/recipes/default.rb
          identical  cookbooks/new-component/recipes/install.rb
+            append  cookbooks/main/recipes/default.rb
       """
 
   Scenario: Generate a new recipe for a specific package/version that is stable
