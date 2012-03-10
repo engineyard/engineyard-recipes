@@ -11,7 +11,7 @@ module Engineyard::Recipes
           return "." if self.respond_to?(:flags) && flags[:local] # check for bonus --local flag in CLI
           possible_paths = ['deploy/cookbooks', 'cookbooks']
           destination = possible_paths.find do |cookbooks|
-            Dir.exist?(File.join(destination_root, cookbooks))
+            File.directory?(File.join(destination_root, cookbooks))
           end
           unless destination
             error "Cannot discover cookbooks folder"
