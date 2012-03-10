@@ -8,8 +8,7 @@ module Engineyard::Recipes
       argument :recipe_name
       argument :package
       argument :version
-      argument :unmasked, :optional => true
-      argument :local, :optional => true
+      argument :flags, :type => :hash # :unmasked & :local
 
       def self.source_root
         File.join(File.dirname(__FILE__), "recipe_generator", "templates")
@@ -20,18 +19,24 @@ module Engineyard::Recipes
       end
       
       def auto_require_package
-        file = cookbooks_dir "main/recipes/default.rb"
-        require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
-        append_to_file file, require_recipe
+        unless local?
+          file           = cookbooks_dir "main/recipes/default.rb"
+          require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
+          append_to_file file, require_recipe
+        end
       end
       
       private
-      def say(msg, color = nil)
-        color ? shell.say(msg, color) : shell.say(msg)
-      end
-      
       def known_package?
         package =~ /UNKNOWN/
+      end
+      
+      def local?
+        flags[:local]
+      end
+      
+      def unmasked
+        flags[:unmasked]
       end
     end
   end

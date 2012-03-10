@@ -6,7 +6,7 @@ module Engineyard::Recipes
       include Thor::Actions
       
       argument :recipe_name
-      argument :local, :optional => true
+      argument :flags, :type => :hash
 
       def self.source_root
         @tmpdir ||= Dir.mktmpdir
@@ -17,11 +17,16 @@ module Engineyard::Recipes
       end
       
       def auto_require_package
-        file = cookbooks_dir "main/recipes/default.rb"
-        if File.directory?(File.join(self.class.source_root, "cookbooks", recipe_name, "recipes"))
+        unless local?
+          file = cookbooks_dir "main/recipes/default.rb"
           require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
           append_to_file file, require_recipe
         end
+      end
+      
+      private
+      def local?
+        flags[:local]
       end
     end
   end

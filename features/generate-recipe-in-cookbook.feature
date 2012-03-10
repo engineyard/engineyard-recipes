@@ -82,7 +82,6 @@ Feature: Generate package recipe into cookbook
     
     """    
 
-  @wip
   Scenario: Generate a new recipe into local folder instead of in cookbooks/
     When I run local executable "ey-recipes" with arguments "recipe component --local"
     And file "component/recipes/default.rb" is created

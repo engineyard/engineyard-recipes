@@ -34,19 +34,6 @@ Feature: Clone recipe from git repositories
             append  cookbooks/main/recipes/default.rb
       """
 
-  Scenario: Clone recipe repo, do not auto-require if no recipe
-    Given I am have a local recipe "library" at "/tmp/ey-recipes/library"
-    When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/library"
-    Then file "cookbooks/library/libraries/mylib.rb" is created
-    And file "cookbooks/main/recipes/default.rb" does not contain "require_recipe 'library'"
-    And I should see exactly
-      """
-             exist  cookbooks
-            create  cookbooks/library/README.rdoc
-            create  cookbooks/library/libraries/mylib.rb
-      """
-
-  @wip
   Scenario: Clone a single recipe from a local folder into local folder instead of in cookbooks/
     Given I am have a local recipe "blank" at "/tmp/ey-recipes/blank"
     When I run local executable "ey-recipes" with arguments "clone /tmp/ey-recipes/blank --local"
