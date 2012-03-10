@@ -22,7 +22,23 @@ Feature: Setup your EY Cloud cookbook to use SM framework extensions
       # create  cookbooks/eyapi/recipes/default.rb
       # create  cookbooks/eyapi/recipes/install.rb
 
-  Scenario: Create new EY CLoud custom cookbooks with SM extensions
+  Scenario: Setup SM extensions within chef-on-deploy
+    Given I am in the "rails" project folder
+    When I run local executable "ey-recipes" with arguments "init --on-deploy"
+    When I run local executable "ey-recipes" with arguments "init-sm"
+    Then I should see exactly
+      """
+             exist  deploy/cookbooks
+            create  deploy/cookbooks/sm/attributes/recipe.rb
+            create  deploy/cookbooks/sm/recipes/default.rb
+            create  deploy/cookbooks/sm/recipes/install.rb
+            append  deploy/cookbooks/main/recipes/default.rb
+      """
+      # create  deploy/cookbooks/eyapi/attributes/recipe.rb
+      # create  deploy/cookbooks/eyapi/recipes/default.rb
+      # create  deploy/cookbooks/eyapi/recipes/install.rb
+
+  Scenario: Create new EY Cloud custom cookbooks with SM extensions
     Given I am in the "rails" project folder
     When I run local executable "ey-recipes" with arguments "init --sm"
     And I should see exactly

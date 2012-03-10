@@ -10,7 +10,7 @@ module Engineyard::Recipes
       end
       
       def install_cookbooks
-        directory "cookbooks"
+        directory "cookbooks", cookbooks_destination
       end
       
       def auto_require_package
