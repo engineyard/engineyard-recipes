@@ -78,15 +78,12 @@ module Engineyard
       method_option :submodule, :aliases => ['--vendor', '-s'], :desc => "Submodule the URI into recipe folder name"
       def sm(uri, *commands)
         require 'engineyard-recipes/generators/sm_generator'
-        recipe_name      = options["name"]
-        if options["submodule"]
-          error "This project is not a git repository yet." unless File.directory?(".git")
-          sm_vendor_path = File.join("cookbooks", recipe_name, options["submodule"])
-        end
-        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri, commands, sm_vendor_path])
-        if sm_vendor_path
-          FetchUri.vendor_recipe_into_recipe(uri, sm_vendor_path)
-        end
+        recipe_name = options["name"]
+        submodule = options["submodule"] || false
+        
+        error "This project is not a git repository yet." if submodule && !File.directory?(".git")
+
+        Engineyard::Recipes::Generators::SmGenerator.start([recipe_name, uri, commands, { :submodule => submodule }])
       end
       
       desc "version", "show version information"

@@ -58,6 +58,15 @@ Feature: Wrap SM framework extension
     Then file "cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../../../cookbooks/jenkins/repo', __FILE__))"
     And git command "git submodule add https://github.com/eystacks/sm_jenkins.git cookbooks/jenkins/repo" is run
     
+  Scenario: Wrap a git SM extension and vendor it via submodules for chef-on-deploy
+    When I run local executable "ey-recipes" with arguments "init -d"
+    When I run local executable "ey-recipes" with arguments "init-sm"
+    Given project is a git repository
+    And I mock out git commands
+    When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule repo" 
+    Then file "deploy/cookbooks/jenkins/attributes/recipe.rb" contains "sm_jenkins_uri(File.expand_path('../../repo', __FILE__))"
+    And git command "git submodule add https://github.com/eystacks/sm_jenkins.git deploy/cookbooks/jenkins/repo" is run
+
   Scenario: Do not allow submodules flag if current project is not a git repo
     Given I mock out git commands
     When I run local executable "ey-recipes" with arguments "sm https://github.com/eystacks/sm_jenkins.git --name jenkins --submodule repo" 

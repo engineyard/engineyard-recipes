@@ -14,6 +14,7 @@ Patches:
 ### v0.3.2
 
 * Fix `init-sm` to generate into `deploy/cookbooks` if its present
+* Fix `sm --submodule` to generate into `deploy/cookbooks/<recipe>/repo` if its present
 
 ## v0.2
 

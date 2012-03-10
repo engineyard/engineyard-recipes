@@ -9,7 +9,7 @@ module Engineyard::Recipes
       argument :recipe_name
       argument :sm_ext_uri
       argument :sm_ext_commands, :type => :array
-      argument :sm_vendor_path, :required => false
+      argument :flags, :required => false
 
       def self.source_root
         File.join(File.dirname(__FILE__), "sm_generator", "templates")
@@ -34,11 +34,24 @@ module Engineyard::Recipes
         append_to_file file, require_recipe
       end
       
-      private
-      def say(msg, color = nil)
-        color ? shell.say(msg, color) : shell.say(msg)
+      def vendor
+        if submodule?
+          FetchUri.vendor_recipe_into_recipe(sm_ext_uri, sm_vendor_path)
+        end
       end
       
+      protected
+      def submodule?
+        flags[:submodule]
+      end
+      
+      def sm_vendor_path_name
+        "repo"
+      end
+      
+      def sm_vendor_path
+        cookbooks_dir File.join(recipe_name, "repo")
+      end
     end
   end
 end
