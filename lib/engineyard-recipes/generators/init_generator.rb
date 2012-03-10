@@ -12,7 +12,6 @@ module Engineyard::Recipes
       end
       
       def install_cookbooks
-        file       = "#{cookbooks_destination}/main/recipes/default.rb"
         if on_deploy
           directory "deploy"
         end
