@@ -3,9 +3,9 @@ Feature: Timezone override
   
   Background:
     Given I am in the "rails" project folder
-    When I run local executable "ey-recipes" with arguments "init"
     
   Scenario: Set the timezone I want
+    When I run local executable "ey-recipes" with arguments "init"
     When I run local executable "ey-recipes" with arguments "timezone Australia/Tasmania"
     Then file "cookbooks/timezone-override/recipes/default.rb" contains
       """
@@ -34,7 +34,21 @@ Feature: Timezone override
             append  cookbooks/main/recipes/default.rb
       """
 
+  Scenario: Set timezone into deploy/cookbooks/ rather than cookbooks/
+    When I run local executable "ey-recipes" with arguments "init -d"
+    When I run local executable "ey-recipes" with arguments "timezone Australia/Tasmania"
+    Then file "deploy/cookbooks/main/recipes/default.rb" contains "require_recipe 'timezone-override'"
+    And I should see exactly
+      """
+             exist  deploy/cookbooks
+            create  deploy/cookbooks/timezone-override/recipes/default.rb
+            append  deploy/cookbooks/main/recipes/default.rb
+      """
+  
+  
+  
   Scenario: Cannot set an invalid timezone
+    When I run local executable "ey-recipes" with arguments "init"
     When I run local executable "ey-recipes" with arguments "timezone XXXX"
     And file "cookbooks/main/recipes/default.rb" does not contain "require_recipe 'timezone-override'"
     And I should see exactly
