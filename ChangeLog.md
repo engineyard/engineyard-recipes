@@ -1,9 +1,15 @@
 # ChangeLog
 
-## v0.3.pre
+## v0.3
 
 * `--local` (clone, recipes, definitions) - generates into local path instead of cookbooks/ subfolder; useful for developing dedicated recipe repositories instead of an entire cookbook; ignores cookbooks/main/recipes/default.rb
 * `init -d` - enables "run chef during deploy". Cookbooks generated into `deploy/cookbooks/` instead of `cookbooks/`
+
+Patches:
+
+### v0.3.1
+
+* Fixed ruby 1.8 bug - Dir.exist? => File.directory?
 
 ## v0.2
 
