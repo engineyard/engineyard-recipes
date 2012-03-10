@@ -20,6 +20,17 @@ $ ey-recipes clone /tmp/recipes/ey-dnapi
 $ ey recipes upload --apply
 ```
 
+Alternately, you can have chef recipes run during deployment rather than by explicitly running them:
+
+```
+$ cd /path/to/my/app
+$ ey-recipes init -d
+$ ey-recipes recipe somepackage
+
+# then deploy to apply recipes
+$ ey deploy
+```
+
 ## Usage
 
 Getting started:
@@ -32,6 +43,25 @@ $ ey-recipes init
     create  cookbooks/main/libraries/ruby_block.rb
     create  cookbooks/main/libraries/run_for_app.rb
     create  cookbooks/main/recipes/default.rb
+
+$ ey recipes upload
+$ ey recipes apply
+```
+
+The `-d` or `--on-deploy` flag will setup your application to run recipes during each deployment.
+
+```
+$ cd /path/to/my/app
+$ ey-recipes init --on-deploy
+    create  deploy/before_migrate.rb
+    create  deploy/solo.rb
+    create  deploy/cookbooks/main/attributes/recipe.rb
+    create  deploy/cookbooks/main/definitions/ey_cloud_report.rb
+    create  deploy/cookbooks/main/libraries/ruby_block.rb
+    create  deploy/cookbooks/main/libraries/run_for_app.rb
+    create  deploy/cookbooks/main/recipes/default.rb
+
+$ ey deploy
 ```
 
 Quickly generate recipes from git repositories or local folders. See bottom of README for community examples.
