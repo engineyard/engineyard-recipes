@@ -19,3 +19,16 @@ Feature: Generate a new custom cookbook for your EY Cloud environments
     Given I am in the "rails" project folder
     When I run local executable "ey-recipes" with arguments "init -d"
     And file "deploy/before_migrate.rb" is created
+    And file "deploy/cookbooks/main/recipes/default.rb" is created
+    And I should see exactly
+      """
+            create  deploy
+            create  deploy/before_migrate.rb
+            create  deploy/solo.rb
+            create  deploy/cookbooks
+            create  deploy/cookbooks/main/attributes/recipe.rb
+            create  deploy/cookbooks/main/definitions/ey_cloud_report.rb
+            create  deploy/cookbooks/main/libraries/ruby_block.rb
+            create  deploy/cookbooks/main/libraries/run_for_app.rb
+            create  deploy/cookbooks/main/recipes/default.rb
+      """

@@ -12,16 +12,24 @@ module Engineyard::Recipes
       end
       
       def install_cookbooks
-        file       = "cookbooks/main/recipes/default.rb"
-        unless File.exists?(File.join(destination_root, "cookbooks/main/recipes/default.rb"))
-          directory "cookbooks"
-        end
+        file       = "#{cookbooks_destination}/main/recipes/default.rb"
         if on_deploy
           directory "deploy"
+        end
+        unless File.exists?(File.join(destination_root, "#{cookbooks_destination}/main/recipes/default.rb"))
+          directory "cookbooks", cookbooks_destination
         end
       end
       
       private
+      def cookbooks_destination
+        if on_deploy
+          "deploy/cookbooks"
+        else
+          "cookbooks"
+        end
+      end
+      
       def say(msg, color = nil)
         color ? shell.say(msg, color) : shell.say(msg)
       end
