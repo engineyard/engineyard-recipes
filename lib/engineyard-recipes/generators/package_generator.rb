@@ -2,7 +2,7 @@ require 'thor/group'
 
 module Engineyard::Recipes
   module Generators
-    class RecipeGenerator < BaseGenerator
+    class PackageGenerator < BaseGenerator
       include Thor::Actions
       
       argument :recipe_name
@@ -11,7 +11,7 @@ module Engineyard::Recipes
       argument :flags, :type => :hash # :unmasked & :local
 
       def self.source_root
-        File.join(File.dirname(__FILE__), "recipe_generator", "templates")
+        File.join(File.dirname(__FILE__), "package_generator", "templates")
       end
       
       def install_cookbooks
@@ -26,7 +26,11 @@ module Engineyard::Recipes
         end
       end
       
-      private
+      protected
+      def recipe_name_variable_name
+        @recipe_name_variable_name ||= recipe_name.gsub(/\W+/, '_')
+      end
+      
       def known_package?
         package =~ /UNKNOWN/
       end

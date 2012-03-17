@@ -12,7 +12,7 @@ Feature: Install a gentoo package
     And file "cookbooks/new-component/recipes/default.rb" contains "require_recipe 'new-component::install'"
     And file "cookbooks/new-component/recipes/install.rb" is created
     And file "cookbooks/new-component/attributes/recipe.rb" is created
-    And file "cookbooks/new-component/attributes/recipe.rb" contains "# new-component_version('1.0.0')"
+    And file "cookbooks/new-component/attributes/recipe.rb" contains "# new_component_version('1.0.0')"
     And file "cookbooks/main/recipes/default.rb" contains "require_recipe 'new-component'"
     And I should see exactly
       """
@@ -57,29 +57,32 @@ Feature: Install a gentoo package
     """    
 
   Scenario: Generate a new recipe for a specific package/version that is masked
-    When I run local executable "ey-recipes" with arguments "package gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028 -u"
-    And file "cookbooks/gitosis/recipes/default.rb" is created
-    And file "cookbooks/gitosis/recipes/default.rb" contains "require_recipe 'gitosis::install'"
-    And file "cookbooks/gitosis/recipes/install.rb" is created
-    And file "cookbooks/gitosis/attributes/recipe.rb" is created
-    And file "cookbooks/gitosis/attributes/recipe.rb" contains "gitosis_version('0.2_p20081028')"
-    And file "cookbooks/gitosis/attributes/recipe.rb" does not contain "# gitosis_version('0.2_p20081028')"
-    And file "cookbooks/gitosis/recipes/install.rb" contains
+    When I run local executable "ey-recipes" with arguments "package qt-webkit -p x11-libs/qt-webkit -v 4.4.2 -u"
+    And file "cookbooks/qt-webkit/recipes/default.rb" is created
+    And file "cookbooks/qt-webkit/recipes/default.rb" contains "require_recipe 'qt-webkit::install'"
+    And file "cookbooks/qt-webkit/recipes/install.rb" is created
+    And file "cookbooks/qt-webkit/attributes/recipe.rb" is created
+    And file "cookbooks/qt-webkit/attributes/recipe.rb" contains
+    """
+    qt_webkit_version('4.4.2')
+  
+    """    
+    And file "cookbooks/qt-webkit/recipes/install.rb" contains
     """
     #
-    # Cookbook Name:: gitosis
+    # Cookbook Name:: qt-webkit
     # Recipe:: install
     #
 
-    enable_package 'dev-util/gitosis-gentoo' do
-      version node[:gitosis_version]
+    enable_package 'x11-libs/qt-webkit' do
+      version node[:qt_webkit_version]
     end
 
-    package 'dev-util/gitosis-gentoo' do
-      version node[:gitosis_version]
+    package 'x11-libs/qt-webkit' do
+      version node[:qt_webkit_version]
       action :install
     end
-    
+
     """    
 
   Scenario: Generate a new recipe into local folder instead of in cookbooks/

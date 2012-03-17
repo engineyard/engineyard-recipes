@@ -35,8 +35,8 @@ module Engineyard
         unmasked = options["unmasked"] || false
         local    = options["local"] || false
         
-        require 'engineyard-recipes/generators/recipe_generator'
-        Engineyard::Recipes::Generators::RecipeGenerator.start([
+        require 'engineyard-recipes/generators/package_generator'
+        Engineyard::Recipes::Generators::PackageGenerator.start([
           recipe_name, package, version, {:unmasked => unmasked, :local => local}
         ])
       end

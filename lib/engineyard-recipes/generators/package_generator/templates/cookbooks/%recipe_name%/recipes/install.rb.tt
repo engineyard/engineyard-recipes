@@ -6,17 +6,17 @@
 <% unless known_package? -%>
 <% if unmasked -%>
 enable_package '<%= package %>' do
-  version node[:<%= recipe_name %>_version]
+  version node[:<%= recipe_name_variable_name %>_version]
 end
 
 <% end -%>
 package '<%= package %>' do
-  version node[:<%= recipe_name %>_version]
+  version node[:<%= recipe_name_variable_name %>_version]
   action :install
 end
 <% else -%>
 # package '<%= package %>' do
-#   version node[:<%= recipe_name %>_version]
+#   version node[:<%= recipe_name_variable_name %>_version]
 #   action :install
 # end
 <% end -%>
