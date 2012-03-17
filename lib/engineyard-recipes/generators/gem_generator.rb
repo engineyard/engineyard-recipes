@@ -23,11 +23,11 @@ module Engineyard::Recipes
       
       protected
       def git_user_name
-        `git config user.name`.strip
+        `git config  --global user.name`.strip
       end
 
       def git_user_email
-        `git config user.email`.strip
+        `git config  --global user.email`.strip
       end
     end
   end
