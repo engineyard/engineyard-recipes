@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v0.5.pre
+
+* `gem` - create new recipes that are ready to be packaged as rubygems
+
 ## v0.4
 
 * `package` - renamed from `recipe`; bug fixes
