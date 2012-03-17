@@ -41,6 +41,15 @@ module Engineyard
         ])
       end
       
+      desc "gem NAME", "Name of the recipe"
+      method_option :repo, :aliases => ['-r'], :desc => "Name of the repository. Default: eycloud-recipes-NAME"
+      def gem(recipe_name)
+        repo_name ||= options["repo"] || "eycloud-recipe-#{recipe_name}"
+
+        require 'engineyard-recipes/generators/gem_generator'
+        Engineyard::Recipes::Generators::GemGenerator.start([recipe_name, repo_name])
+      end
+      
       desc "definition RECIPE DEFINITION", "Generate recipe for a package"
       method_option :local, :aliases => ['-l'], :type => :boolean, :desc => "Generate into local folder, instead of cookbooks/RECIPE_NAME"
       def definition(recipe_name, definition_name)
