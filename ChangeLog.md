@@ -1,5 +1,9 @@
 # ChangeLog
 
+## v0.4
+
+* `package` - renamed from `recipe`; bug fixes
+
 ## v0.3
 
 * `--local` (clone, recipes, definitions) - generates into local path instead of cookbooks/ subfolder; useful for developing dedicated recipe repositories instead of an entire cookbook; ignores cookbooks/main/recipes/default.rb
