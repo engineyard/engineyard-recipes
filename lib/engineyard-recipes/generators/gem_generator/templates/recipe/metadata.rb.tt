@@ -1,0 +1,7 @@
+name              "<%= recipe_name %>"
+description       "<%= recipe_name.humanize.titleize %> recipe for EY Cloud"
+long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+maintainer        "<%= git_user_name %>"
+maintainer_email  "<%= git_user_email %>"
+version           "0.1.0"
+# depends           "cronjobs"
