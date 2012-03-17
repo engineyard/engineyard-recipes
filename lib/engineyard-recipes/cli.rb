@@ -24,12 +24,12 @@ module Engineyard
         Engineyard::Recipes::Generators::InitSmGenerator.start
       end
       
-      desc "recipe RECIPE", "Generate recipe for a package"
+      desc "package PACKAGE", "Install a gentoo ebuild package"
       method_option :package, :aliases => ['-p'], :desc => "Gentoo package name, e.g. dev-util/gitosis-gentoo"
       method_option :version, :aliases => ['-v'], :desc => "Gentoo package version, e.g. 0.2_p20081028"
       method_options %w( unmasked -u ) => :boolean, :desc => "Unmask the required gentoo package"
       method_option :local, :aliases => ['-l'], :type => :boolean, :desc => "Generate into local folder, instead of cookbooks/RECIPE_NAME"
-      def recipe(recipe_name)
+      def package(recipe_name)
         package  = options["package"] || "UNKNOWN/#{recipe_name}"
         version  = options["version"] || '1.0.0'
         unmasked = options["unmasked"] || false

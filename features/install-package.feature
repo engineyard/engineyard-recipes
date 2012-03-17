@@ -1,5 +1,5 @@
-Feature: Generate package recipe into cookbook
-  I want to generate a new chef recipe for a package
+Feature: Install a gentoo package
+  I want to generate a new chef recipe that will install a package
   And it is automatically included in the main recipe/run
   
   Background:
@@ -7,7 +7,7 @@ Feature: Generate package recipe into cookbook
     When I run local executable "ey-recipes" with arguments "init"
   
   Scenario: Generate a new recipe
-    When I run local executable "ey-recipes" with arguments "recipe new-component"
+    When I run local executable "ey-recipes" with arguments "package new-component"
     And file "cookbooks/new-component/recipes/default.rb" is created
     And file "cookbooks/new-component/recipes/default.rb" contains "require_recipe 'new-component::install'"
     And file "cookbooks/new-component/recipes/install.rb" is created
@@ -24,8 +24,8 @@ Feature: Generate package recipe into cookbook
       """
   
   Scenario: Generate a recipe that already exists
-    When I run local executable "ey-recipes" with arguments "recipe new-component"
-    When I run local executable "ey-recipes" with arguments "recipe new-component"
+    When I run local executable "ey-recipes" with arguments "package new-component"
+    When I run local executable "ey-recipes" with arguments "package new-component"
     And I should see exactly
       """
              exist  cookbooks
@@ -36,7 +36,7 @@ Feature: Generate package recipe into cookbook
       """
 
   Scenario: Generate a new recipe for a specific package/version that is stable
-    When I run local executable "ey-recipes" with arguments "recipe gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028"
+    When I run local executable "ey-recipes" with arguments "package gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028"
     And file "cookbooks/gitosis/recipes/default.rb" is created
     And file "cookbooks/gitosis/recipes/default.rb" contains "require_recipe 'gitosis::install'"
     And file "cookbooks/gitosis/recipes/install.rb" is created
@@ -57,7 +57,7 @@ Feature: Generate package recipe into cookbook
     """    
 
   Scenario: Generate a new recipe for a specific package/version that is masked
-    When I run local executable "ey-recipes" with arguments "recipe gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028 -u"
+    When I run local executable "ey-recipes" with arguments "package gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028 -u"
     And file "cookbooks/gitosis/recipes/default.rb" is created
     And file "cookbooks/gitosis/recipes/default.rb" contains "require_recipe 'gitosis::install'"
     And file "cookbooks/gitosis/recipes/install.rb" is created
@@ -83,7 +83,7 @@ Feature: Generate package recipe into cookbook
     """    
 
   Scenario: Generate a new recipe into local folder instead of in cookbooks/
-    When I run local executable "ey-recipes" with arguments "recipe component --local"
+    When I run local executable "ey-recipes" with arguments "package component --local"
     And file "component/recipes/default.rb" is created
     And file "component/recipes/default.rb" contains "require_recipe 'component::install'"
     And file "component/recipes/install.rb" is created
