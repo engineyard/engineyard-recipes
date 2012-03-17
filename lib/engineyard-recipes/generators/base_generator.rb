@@ -2,8 +2,11 @@ require 'thor/group'
 
 module Engineyard::Recipes
   module Generators
+    class CookbooksNotFound < StandardError; end
+
     class BaseGenerator < Thor::Group
       include Thor::Actions
+
 
       protected
       def cookbooks_destination
@@ -13,9 +16,7 @@ module Engineyard::Recipes
           destination = possible_paths.find do |cookbooks|
             File.directory?(File.join(destination_root, cookbooks))
           end
-          unless destination
-            error "Cannot discover cookbooks folder"
-          end
+          raise CookbooksNotFound unless destination
           destination
         end
       end

@@ -15,7 +15,11 @@ module Engineyard::Recipes
       end
       
       def install_cookbooks
-        directory "cookbooks", cookbooks_destination
+        begin
+          directory "cookbooks", cookbooks_destination
+        rescue CookbooksNotFound
+          directory "cookbooks/%recipe_name%", "."
+        end
       end
       
       def auto_require_package
@@ -24,6 +28,8 @@ module Engineyard::Recipes
           require_recipe = "\nrequire_recipe '#{recipe_name}'\n"
           append_to_file file, require_recipe
         end
+      rescue CookbooksNotFound
+        # step not required if no cookbooks/ found
       end
       
       protected
