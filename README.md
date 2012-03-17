@@ -11,7 +11,7 @@ Tools to generate, upload, test and apply chef recipes for Engine Yard Cloud.
 ```
 $ cd /path/to/my/app
 $ ey-recipes init   # initial scaffolding for cookbooks
-$ ey-recipes recipe somepackage
+$ ey-recipes package somepackage
 $ ey-recipes definition somehelpers specific_helper_method
 $ git clone git://github.com/damm/ey-dnapi.git /tmp/recipes/ey-dnapi
 $ ey-recipes clone /tmp/recipes/ey-dnapi
@@ -25,7 +25,7 @@ Alternately, you can have chef recipes run during deployment rather than by expl
 ```
 $ cd /path/to/my/app
 $ ey-recipes init -d
-$ ey-recipes recipe somepackage
+$ ey-recipes package somepackage
 
 # then deploy to apply recipes
 $ ey deploy
@@ -77,7 +77,7 @@ $ ey-recipes clone /tmp/recipes/ey-dnapi
 Generate scaffolding for a package/service.
 
 ```
-$ ey-recipes recipe newthing
+$ ey-recipes package newthing
     create  cookbooks/newthing/attributes/recipe.rb
     create  cookbooks/newthing/recipes/default.rb
     create  cookbooks/newthing/recipes/install.rb
@@ -87,7 +87,8 @@ $ ey-recipes recipe newthing
 Specify an explicit Gentoo package.
 
 ```
-$ ey-recipes recipe gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028
+$ ey-recipes package gitosis -p dev-util/gitosis-gentoo -v 0.2_p20081028
+$ ey-recipes package qt-webkit -p x11-libs/qt-webkit -v 4.4.2 -u
 ```
 
 To use a masked package, pass the `--unmasked/-u` flag, and install the `emerge` helper described below.
