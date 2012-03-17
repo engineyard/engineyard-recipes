@@ -43,11 +43,13 @@ module Engineyard
       
       desc "gem NAME", "Name of the recipe"
       method_option :repo, :aliases => ['-r'], :desc => "Name of the repository. Default: eycloud-recipes-NAME"
+      method_option :helper, :type => :boolean, :desc => "Only helpers/definitions, no recipes included."
       def gem(recipe_name)
-        repo_name ||= options["repo"] || "eycloud-recipe-#{recipe_name}"
+        recipe_type ||= options["helper"] ? "helper" : "recipe"
+        repo_name ||= options["repo"] || "eycloud-#{recipe_type}-#{recipe_name}"
 
         require 'engineyard-recipes/generators/gem_generator'
-        Engineyard::Recipes::Generators::GemGenerator.start([recipe_name, repo_name])
+        Engineyard::Recipes::Generators::GemGenerator.start([recipe_name, repo_name, recipe_type])
       end
       
       desc "definition RECIPE DEFINITION", "Generate recipe for a package"

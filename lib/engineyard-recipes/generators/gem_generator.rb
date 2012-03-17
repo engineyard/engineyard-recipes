@@ -8,6 +8,7 @@ module Engineyard::Recipes
 
       argument :recipe_name
       argument :repo_name
+      argument :recipe_type
       
       def self.source_root
         File.join(File.dirname(__FILE__), "gem_generator", "templates")
@@ -17,8 +18,14 @@ module Engineyard::Recipes
         directory "gem", repo_name
       end
       
+      def install_metadata
+        directory "metadata", repo_name
+      end
+
       def install_recipe
-        directory "recipe", repo_name
+        if recipe_type == "recipe"
+          directory "recipe", repo_name
+        end
       end
       
       protected
