@@ -32,3 +32,6 @@ Feature: Generate a new custom cookbook for your EY Cloud environments
             create  deploy/cookbooks/main/libraries/run_for_app.rb
             create  deploy/cookbooks/main/recipes/default.rb
       """
+
+  # TODO - make --on-deploy the default
+  # TODO - include emerge definitions
