@@ -3,6 +3,7 @@
 ## v0.5.pre
 
 * `gem` - create new recipes that are ready to be packaged as rubygems
+* `gem --helper` - create project of libraries/definitions; no recipes
 
 ## v0.4
 
