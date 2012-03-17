@@ -1,4 +1,5 @@
 require 'thor/group'
+require 'active_support/core_ext/string'
 
 module Engineyard::Recipes
   module Generators
@@ -21,12 +22,12 @@ module Engineyard::Recipes
       end
       
       protected
-      def cookbooks_destination
-        if on_deploy
-          "deploy/cookbooks"
-        else
-          "cookbooks"
-        end
+      def git_user_name
+        `git config user.name`.strip
+      end
+
+      def git_user_email
+        `git config user.email`.strip
       end
     end
   end

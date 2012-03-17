@@ -1,0 +1,11 @@
+# <%= recipe_name.humanize.titleize %> recipe for EY Cloud
+
+DESCRIPTION HERE
+
+## Installation
+
+INSTALLATION HERE
+
+## License
+
+MIT LICENSE
