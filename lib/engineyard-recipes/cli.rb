@@ -28,16 +28,14 @@ module Engineyard
       method_option :package, :aliases => ['-p'], :desc => "Gentoo package name, e.g. dev-util/gitosis-gentoo"
       method_option :version, :aliases => ['-v'], :desc => "Gentoo package version, e.g. 0.2_p20081028"
       method_options %w( unmasked -u ) => :boolean, :desc => "Unmask the required gentoo package"
-      method_option :local, :aliases => ['-l'], :type => :boolean, :desc => "Generate into local folder, instead of cookbooks/RECIPE_NAME"
       def package(recipe_name)
         package  = options["package"] || "UNKNOWN/#{recipe_name}"
         version  = options["version"] || '1.0.0'
         unmasked = options["unmasked"] || false
-        local    = options["local"] || false
         
         require 'engineyard-recipes/generators/package_generator'
         Engineyard::Recipes::Generators::PackageGenerator.start([
-          recipe_name, package, version, {:unmasked => unmasked, :local => local}
+          recipe_name, package, version, {:unmasked => unmasked}
         ])
       end
       
@@ -53,12 +51,9 @@ module Engineyard
       end
       
       desc "definition RECIPE DEFINITION", "Generate recipe for a package"
-      method_option :local, :aliases => ['-l'], :type => :boolean, :desc => "Generate into local folder, instead of cookbooks/RECIPE_NAME"
       def definition(recipe_name, definition_name)
-        local = options["local"] || false
-
         require 'engineyard-recipes/generators/definition_generator'
-        Engineyard::Recipes::Generators::DefinitionGenerator.start([recipe_name, definition_name, {:local => local}])
+        Engineyard::Recipes::Generators::DefinitionGenerator.start([recipe_name, definition_name])
       end
       
       desc "timezone TIMEZONE", "Generate recipe to set the timezone"
@@ -71,14 +66,11 @@ module Engineyard
       
       desc "clone URI", "Clone a recipe into cookbook. URI can be git or local path."
       method_option :name, :aliases => ['-n'], :desc => "Specify name of recipe. Defaults to base name."
-      method_option :local, :aliases => ['-l'], :type => :boolean, :desc => "Generate into local folder, instead of cookbooks/RECIPE_NAME"
       def clone(folder_path) # TODO support git URIs
-        local = options["local"] || false
-
         require 'engineyard-recipes/generators/local_recipe_clone_generator'
         generator = Engineyard::Recipes::Generators::LocalRecipeCloneGenerator
         _, recipe_name = FetchUri.fetch_recipe(folder_path, generator.source_root, options["name"])
-        generator.start([recipe_name, {:local => local}])
+        generator.start([recipe_name])
         
       rescue Engineyard::Recipes::FetchUri::UnknownPath => e
         error "No recipe found at #{e.message}"

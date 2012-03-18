@@ -2,20 +2,20 @@ require 'thor/group'
 
 module Engineyard::Recipes
   module Generators
+    class CookbooksNotFound < StandardError; end
+
     class BaseGenerator < Thor::Group
       include Thor::Actions
+
 
       protected
       def cookbooks_destination
         @cookbooks_destination ||= begin
-          return "." if self.respond_to?(:flags) && flags[:local] # check for bonus --local flag in CLI
           possible_paths = ['deploy/cookbooks', 'cookbooks']
           destination = possible_paths.find do |cookbooks|
             File.directory?(File.join(destination_root, cookbooks))
           end
-          unless destination
-            error "Cannot discover cookbooks folder"
-          end
+          raise CookbooksNotFound unless destination
           destination
         end
       end

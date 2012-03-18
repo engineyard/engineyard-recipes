@@ -85,18 +85,19 @@ Feature: Install a gentoo package
 
     """    
 
-  Scenario: Generate a new recipe into local folder instead of in cookbooks/
-    When I run local executable "ey-recipes" with arguments "package component --local"
-    And file "component/recipes/default.rb" is created
-    And file "component/recipes/default.rb" contains "require_recipe 'component::install'"
-    And file "component/recipes/install.rb" is created
-    And file "component/attributes/recipe.rb" is created
-    And file "component/attributes/recipe.rb" contains "# component_version('1.0.0')"
+  Scenario: Generate a new recipe into local folder if no deploy/cookbooks/ or cookbooks/ folder
+    Given I am in the "rails" project folder
+    When I run local executable "ey-recipes" with arguments "package component"
+    And file "recipes/default.rb" is created
+    And file "recipes/default.rb" contains "require_recipe 'component::install'"
+    And file "recipes/install.rb" is created
+    And file "attributes/recipe.rb" is created
+    And file "attributes/recipe.rb" contains "# component_version('1.0.0')"
     And I should see exactly
       """
              exist  
-            create  component/attributes/recipe.rb
-            create  component/recipes/default.rb
-            create  component/recipes/install.rb
+            create  attributes/recipe.rb
+            create  recipes/default.rb
+            create  recipes/install.rb
       """
 

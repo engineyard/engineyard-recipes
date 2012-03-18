@@ -6,6 +6,8 @@ require 'engineyard-recipes/cli'
 
 begin
   Engineyard::Recipes::CLI.start
+rescue Engineyard::Recipes::Generators::CookbooksNotFound => e
+  error "Cannot discover cookbooks folder"
 rescue Interrupt => e
   puts
   puts "Quitting..."

@@ -1,6 +1,7 @@
 Given /^I am in the "([^\"]*)" project folder$/ do |project|
   project_folder = File.expand_path(File.join(@fixtures_path, "projects", project))
   in_tmp_folder do
+    FileUtils.rm_rf(project)
     FileUtils.cp_r(project_folder, project)
     setup_active_project_folder(project)
   end
