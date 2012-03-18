@@ -7,7 +7,6 @@ module Engineyard::Recipes
       
       argument :recipe_name
       argument :definition_name
-      argument :flags, :type => :hash
 
       def self.source_root
         File.join(File.dirname(__FILE__), "definition_generator", "templates")
@@ -15,9 +14,9 @@ module Engineyard::Recipes
       
       def install_cookbooks
         directory "cookbooks", cookbooks_destination
+      rescue CookbooksNotFound
+        directory "cookbooks/%recipe_name%", "."
       end
-      
-      private
     end
   end
 end

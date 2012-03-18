@@ -11,7 +11,6 @@ module Engineyard::Recipes
       protected
       def cookbooks_destination
         @cookbooks_destination ||= begin
-          return "." if self.respond_to?(:flags) && flags[:local] # check for bonus --local flag in CLI
           possible_paths = ['deploy/cookbooks', 'cookbooks']
           destination = possible_paths.find do |cookbooks|
             File.directory?(File.join(destination_root, cookbooks))
