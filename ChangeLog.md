@@ -4,6 +4,7 @@
 
 * `gem` - create new recipes that are ready to be packaged as rubygems
 * `gem --helper` - create project of libraries/definitions; no recipes
+* Removed `--local` - recipe generators detect `.../cookbooks/` missing and assume it is a gem-recipe
 
 ## v0.4
 
