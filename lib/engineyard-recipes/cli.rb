@@ -18,6 +18,12 @@ module Engineyard
         init_sm if options[:sm]
       end
       
+      desc "use RECIPE", "Enables a recipe gem/repo within the target application"
+      def use(recipe_name_or_uri)
+        require 'engineyard-recipes/generators/use_generator'
+        Engineyard::Recipes::Generators::UseGenerator.start([recipe_name_or_uri])
+      end
+      
       desc "init-sm", "Setup your EY Cloud cookbook to use SM framework extensions"
       def init_sm
         require 'engineyard-recipes/generators/init_sm_generator'
