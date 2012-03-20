@@ -9,12 +9,19 @@ module Engineyard
 
       desc "init", "Creates cookbooks scaffolding for your recipes"
       method_option :"on-deploy", :aliases => ['-d'], :type => :boolean, :desc => "Run recipes during deployment"
+      method_option :chef, :type => :boolean, :desc => "Use bundled chef instead of Engine Yard chef version"
       method_option :sm, :type => :boolean, :desc => "Also install SM framework support"
       def init
-        on_deploy = options["on-deploy"] || false
+        on_deploy    = options["on-deploy"] || false
+        bundled_chef = options["chef"] || false
         
-        require 'engineyard-recipes/generators/init_generator'
-        Engineyard::Recipes::Generators::InitGenerator.start([on_deploy])
+        if bundled_chef
+          require 'engineyard-recipes/generators/init_bundled_chef_generator'
+          Engineyard::Recipes::Generators::InitGenerator.start([{:on_deploy => on_deploy}])
+        else
+          require 'engineyard-recipes/generators/init_resin_chef_generator'
+          Engineyard::Recipes::Generators::InitGenerator.start([{:on_deploy => on_deploy}])
+        end
         init_sm if options[:sm]
       end
       

@@ -5,14 +5,22 @@ module Engineyard::Recipes
     class InitGenerator < BaseGenerator
       include Thor::Actions
 
-      argument :on_deploy, :optional => true
+      argument :flags, :type => :hash
       
       def self.source_root
-        File.join(File.dirname(__FILE__), "init_generator", "templates")
+        File.join(File.dirname(__FILE__), "init_bundled_chef_generator", "templates")
+      end
+      
+      def gemfile
+        append_file "Gemfile", <<-GEMS
+
+gem "chef", :group => :eycloud
+gem "yajl-ruby", :group => :eycloud
+GEMS
       end
       
       def install_cookbooks
-        if on_deploy
+        if on_deploy?
           directory "deploy"
         end
         unless File.exists?(File.join(destination_root, "#{cookbooks_destination}/main/recipes/default.rb"))
@@ -22,11 +30,15 @@ module Engineyard::Recipes
       
       protected
       def cookbooks_destination
-        if on_deploy
+        if on_deploy?
           "deploy/cookbooks"
         else
           "cookbooks"
         end
+      end
+      
+      def on_deploy?
+        flags[:on_deploy]
       end
     end
   end
