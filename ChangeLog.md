@@ -2,6 +2,7 @@
 
 ## v0.5.pre
 
+* `init --on-deploy --chef` - gives you modern chef, and allows recipes-in-rubygems
 * `gem` - create new recipes that are ready to be packaged as rubygems
 * `gem --helper` - create project of libraries/definitions; no recipes
 * Removed `--local` - recipe generators detect `.../cookbooks/` missing and assume it is a gem-recipe
