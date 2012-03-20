@@ -1,6 +1,6 @@
 # ChangeLog
 
-## v0.5.pre
+## v0.5
 
 * `init --on-deploy --chef` - gives you modern chef, and allows recipes-in-rubygems
 * `gem` - create new recipes that are ready to be packaged as rubygems
