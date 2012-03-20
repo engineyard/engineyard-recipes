@@ -14,7 +14,7 @@ module Engineyard::Recipes
       def gemfile
         append_file "Gemfile", <<-GEMS
 
-gem "eycloud-helper-common", :group => :eycloud
+gem "eycloud-helper-common", ">= 0.2.1", :group => :eycloud
 GEMS
       end
       
