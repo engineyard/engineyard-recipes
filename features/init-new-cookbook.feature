@@ -52,14 +52,15 @@ Feature: Generate a new custom cookbook for your EY Cloud environments
       # Runs application cookbooks
       run "cd #{latest_release}; sudo bundle exec chef-solo -c #{latest_release}/deploy/solo.rb -j /etc/chef-custom/dna.json"
       
+      run "cat #{latest_release}/deploy/chef-stacktrace.out 2> /dev/null || echo 'Chef run successful'"
       """
     And I should see exactly
       """
+            append  Gemfile
             create  deploy
             create  deploy/before_migrate.rb
             create  deploy/solo.rb
             create  deploy/cookbooks
             create  deploy/cookbooks/main/recipes/default.rb
-            append  Gemfile
       """
   
