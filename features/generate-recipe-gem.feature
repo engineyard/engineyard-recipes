@@ -17,7 +17,7 @@ Feature: Generate recipe gem
             create  eycloud-recipe-new_thing/metadata.json
             create  eycloud-recipe-new_thing/metadata.rb
              exist  eycloud-recipe-new_thing
-            create  eycloud-recipe-new_thing/new_thing/recipes/default.rb
+            create  eycloud-recipe-new_thing/recipes/default.rb
       """
   
   Scenario: Generate a new helper gem (no recipes)
